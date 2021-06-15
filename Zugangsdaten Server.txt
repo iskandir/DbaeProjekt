@@ -1,0 +1,5 @@
+Zugangsdaten DBAE 
+Server: 207.154.234.136:5432 (IP-Adresse 207.154.234.136, Port 5432)
+Datenbankname: 2021-VerkaufsplattformIT
+Benutzername: 2021-VerkaufsplattformIT
+Passwort: cb5bdbc04bbb89481626f7ced88e229f
