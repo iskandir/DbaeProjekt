@@ -1,0 +1,7 @@
+INSERT INTO hardware(titel, beschreibung, preis, bild, produktnummer, type)
+VALUES(
+    'MSI AMD Radeon RX6700',	'MSI AMD Radeon RX6700 XT Mech 2X 12G',	819.00 , 'https://www.alternate.de/p/600x600/4/4/MSI_AMD_Radeon_RX_6700_XT_MECH_2X_12G__Grafikkarte@@1730744_30.jpg',	'gk_MSI_amd', 'Grafikkarte'
+
+);
+
+SELECT * FORM table
