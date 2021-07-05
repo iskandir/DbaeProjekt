@@ -8,30 +8,28 @@
 <link rel="stylesheet" type="text/css" href="login.css">  
 </head>
 <body>    
+<form method="POST" action="LoginServlet">
     <h2>Login</h2><br>    
-    <div class="login">    
-    <form id="login" method="get" action="login.php">    
+    <div class="login">       
         <label><b>Benutzername   
         </b>    
         </label>    
-        <input type="text" name="Uname" id="Uname" placeholder="Username">    
+        
+        <input type="text" name="username" id="Uname" placeholder="Username">    
         <br><br>    
         <label><b>Passwort     
         </b>    
         </label>    
-        <input type="Password" name="Pass" id="Pass" placeholder="Password">    
+        <input type="Password" name="password" id="Pass" placeholder="Password">    
         <br><br>    
-        <input type="button" name="log" id="log" value="Login">       
+        <input type="submit" value="Login!">       
         <br><br>    
-        <input type="checkbox" id="check">    
-        <span>Remember me</span>    
-        <br>
+
         <a href="#">Passwort vergessen</a>
         <br><br>    
-        <form>
  		<input type="button" value="Zurück!" onclick="history.go(-1)">
 		</form>  
-    </form>     
-</div>    
+   </div>
+   
 </body>    
 </html>
