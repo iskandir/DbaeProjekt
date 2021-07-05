@@ -5,31 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="login.css">  
+<link rel="stylesheet" type="text/css" href="css/login.css">  
 </head>
 <body>    
-<form method="POST" action="LoginServlet">
-    <h2>Login</h2><br>    
+<form class ="login" method="POST" action="LoginServlet">
     <div class="login">       
-        <label><b>Benutzername   
-        </b>    
-        </label>    
+    	<h2>Login / Registrierung</h2>
         
         <input type="text" name="username" id="Uname" placeholder="Username">    
-        <br><br>    
-        <label><b>Passwort     
-        </b>    
-        </label>    
+  
         <input type="Password" name="password" id="Pass" placeholder="Password">    
         <br><br>    
-        <input type="submit" value="Login!">       
-        <br><br>    
+        <div class="box bg-1">
+        <button type="submit" name="login" value="Login!" 
+        class="button button--aylen button--round-l button--text-thick">Login</button>
+        <button type="submit" name="registrierung" value="registrierung" 
+        class="button button--aylen button--round-l button--text-thick">Registrierung</button>
+      
+        <br>    
 
         <a href="#">Passwort vergessen</a>
         <br><br>    
  		<input type="button" value="Zurück!" onclick="history.go(-1)">
 		</form>  
-   </div>
-   
+		
+   </div> 
 </body>    
 </html>

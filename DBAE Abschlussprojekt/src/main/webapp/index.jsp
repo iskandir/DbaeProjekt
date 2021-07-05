@@ -44,7 +44,7 @@
 		      <i class="fa fa-caret-down"></i>
 		    </button>
 		    <div class="dropdown-content">
-		      <a href="login/login.jsp">Login</a>
+		      <a href="login.jsp">Login</a>
 		      <a href="#">Kundenkonto erstellen</a>
 		      <a href="#">Mein Konto</a>
 		      <a href="#">Persönliche Daten</a>
@@ -57,7 +57,7 @@
 		      <i class="fa fa-caret-down"></i>
 		    </button>
 		    <div class="dropdown-content">
-		      <a href="login/login.jsp">Login</a>
+		      <a href="login.jsp">Login</a>
 		    </div>
 		  </div> 
 		</div>   
