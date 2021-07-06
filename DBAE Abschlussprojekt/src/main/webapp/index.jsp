@@ -48,6 +48,7 @@
 		      <a href="#">Kundenkonto erstellen</a>
 		      <a href="#">Mein Konto</a>
 		      <a href="#">Persönliche Daten</a>
+		      <a href="supportForm.jsp">Support/Hilfe</a>
 		    </div>
 		  </div> 
 		</div> 
