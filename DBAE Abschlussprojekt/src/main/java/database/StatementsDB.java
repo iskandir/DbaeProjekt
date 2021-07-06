@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import data.Benutzer;
+import data.Ticket;
 
 public class StatementsDB {
 
@@ -96,6 +97,22 @@ public class StatementsDB {
 			}
 		}
 		return sqlBenutzer;
+	}
+	
+	public static void ticketHinzufügen(Ticket ticket) throws SQLException {
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata VALUES (?, ?, ?, ?, ?");
+		stTicket.setString(1, ticket.getName());
+		stTicket.setString(2, ticket.getVorname());
+		stTicket.setString(3, ticket.getMail());
+		stTicket.setString(4, ticket.getBetreff());
+		stTicket.setString(5, ticket.getInhalt());
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
 	}
 	
 	

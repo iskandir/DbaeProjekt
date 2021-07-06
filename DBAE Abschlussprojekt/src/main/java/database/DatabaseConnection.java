@@ -13,10 +13,10 @@ public class DatabaseConnection {
 	 * 
 	 */
 	protected static Connection con;
-	private static final String DB_SERVER = "127.0.0.1:5432";
-	private static final String DB_NAME = "Uebung02";
-	private static final String DB_USER= "postgres";
-	private static final String DB_PASSWORD= "postgres";
+	private static final String DB_SERVER = "207.154.234.136:5432";
+	private static final String DB_NAME = "2021-VerkaufsplattformIT";
+	private static final String DB_USER= "2021-VerkaufsplattformIT";
+	private static final String DB_PASSWORD= "cb5bdbc04bbb89481626f7ced88e229f";
 	private static final String DB_DRIVER= "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://" + DB_SERVER + "/" + DB_NAME;
 	/**Initialisierung der Verbindung
