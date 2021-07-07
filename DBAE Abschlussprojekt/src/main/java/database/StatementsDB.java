@@ -104,7 +104,7 @@ public class StatementsDB {
 		return sqlBenutzer;
 	}
 	
-public static Benutzer[] getBenutzer() {
+	public static Benutzer[] getBenutzer() {
 		
 		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
 		
@@ -160,6 +160,7 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+	
 	public static Produkt[] getSoftware() {
 		
 		List<Produkt> produktListe = new ArrayList<Produkt>();
@@ -186,6 +187,7 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+	
 	public static Produkt[] getPeripherie() {
 		
 		List<Produkt> produktListe = new ArrayList<Produkt>();
@@ -212,5 +214,22 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+
+	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
+		stTicket.setString(1, ticket.getName());
+		stTicket.setString(2, ticket.getVorname());
+		stTicket.setString(3, ticket.getMail());
+		stTicket.setString(4, ticket.getBetreff());
+		stTicket.setString(5, ticket.getInhalt());
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
+	
 	
 }
