@@ -5,11 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
 
 import java.util.List;
 import java.util.ArrayList;
 
 import data.*;
+=======
+import data.Benutzer;
+import data.Ticket;
+>>>>>>> Marten
 
 public class StatementsDB {
 
@@ -104,6 +109,7 @@ public class StatementsDB {
 		return sqlBenutzer;
 	}
 	
+<<<<<<< HEAD
 public static Benutzer[] getBenutzer() {
 		
 		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
@@ -212,5 +218,23 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+=======
+	public static void ticketHinzufügen(Ticket ticket) throws SQLException {
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
+		stTicket.setString(1, ticket.getName());
+		stTicket.setString(2, ticket.getVorname());
+		stTicket.setString(3, ticket.getMail());
+		stTicket.setString(4, ticket.getBetreff());
+		stTicket.setString(5, ticket.getInhalt());
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
+	
+>>>>>>> Marten
 	
 }

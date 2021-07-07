@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="DBAE Abschlussprojekt/src/main/java"/>
+	<classpathentry kind="src" path="Hausaufgaben/DBAE_Hausaufgabe_01/WEB-INF/classes"/>
+	<classpathentry kind="src" path="Hausaufgaben/DBAE_Hausaufgabe_02/WEB-INF/classes"/>
+	<classpathentry kind="src" path="Hausaufgaben/Uebungsblatt02/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="DBAE Abschlussprojekt/src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="DBAE Abschlussprojekt/src/main/webapp/WEB-INF/lib/postgresql-42.2.18.jar"/>
+	<classpathentry kind="lib" path="Hausaufgaben/DBAE_Hausaufgabe_02/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="Hausaufgaben/DBAE_Hausaufgabe_02/WEB-INF/lib/postgresql-42.2.18.jar"/>
+	<classpathentry kind="lib" path="Hausaufgaben/Uebungsblatt02/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="Hausaufgaben/Uebungsblatt02/WEB-INF/lib/postgresql-42.2.18.jar"/>
+	<classpathentry kind="output" path="DBAE Abschlussprojekt/build/classes"/>
+</classpath>

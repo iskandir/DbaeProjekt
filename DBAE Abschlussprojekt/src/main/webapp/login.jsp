@@ -12,6 +12,7 @@
 		<div class="login">
 			<h2>Login / Registrierung</h2>
 
+<<<<<<< HEAD
 			<input type="text" name="username" id="Uname" placeholder="Username">
 
 			<input type="Password" name="password" id="Pass"
@@ -35,4 +36,15 @@
 
 	</div>
 </body>
+=======
+        <a href="#">Passwort vergessen</a>
+        <br><br>    
+ 		<input type="button" value="Zurück!" onclick="history.go(-1)">
+		 
+		
+   </div> 
+   
+   </form> 
+</body>    
+>>>>>>> Marten
 </html>
