@@ -12,7 +12,9 @@
       <!--Navigation Bar-->
 		<div class="shadow-sm">
 			<nav class="container navbar justify-content-between navbar-toggleable-md" id="mainnav">    
-				<img class="img-fluid header-logo" src="pictures/pig.png" height="50" width="50" alt="companyName">
+				<a href="index.jsp">
+					<img class="img-fluid header-logo" src="pictures/pig.png" height="50" width="50" alt="companyName">
+				</a>
 				<form method="get" action="/listing.xhtml" class="form-inline w-50 mx-2 d-none d-md-inline searchbar" enctype="application/x-www-form-urlencoded" autocomplete="off" name="search_word_inc" accept-charset="utf-8">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" onkeyup="global.handleSuggestLayer(event, this, {})" inputmode="search" placeholder="Shop durchsuchen...">
