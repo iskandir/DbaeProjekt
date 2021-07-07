@@ -37,7 +37,7 @@ public class SupportServlet extends HttpServlet {
 		
 		String msg;
 		try {
-			StatementsDB.ticketHinzufügen(new Ticket(vorname, name , request.getParameter("Betreff"), request.getParameter("Email"), request.getParameter("Inhalt")));
+			StatementsDB.ticketHinzufuegen(new Ticket(vorname, name , request.getParameter("Betreff"), request.getParameter("Email"), request.getParameter("Inhalt")));
 			msg = "Ihr Ticket wird zeitnah von unserem Support mit hoher Priorität bearbeitet!!!:)";
 		} catch (SQLException e) {
 			e.printStackTrace();

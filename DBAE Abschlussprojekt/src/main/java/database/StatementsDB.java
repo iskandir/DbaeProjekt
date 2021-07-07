@@ -213,7 +213,7 @@ public static Benutzer[] getBenutzer() {
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
 
-	public static void ticketHinzufügen(Ticket ticket) throws SQLException {
+	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
 		con.setAutoCommit(false);
 		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
