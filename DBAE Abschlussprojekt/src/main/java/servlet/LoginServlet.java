@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		benutzer = new Benutzer(username,password);
+		System.out.println("Username is:");
 		System.out.println("Loginname:" + username + " Password:" + password);
 		
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(benutzer);

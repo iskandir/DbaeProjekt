@@ -10,11 +10,14 @@ import data.Benutzer;
 public class StatementsDB {
 
 	private static Connection con = null;
+	//Hochzählen der id Variable (keine SerialID, sondern bewusst 
+	//einen Int genommen) 
 	private static int benutzerid = 1;
 	
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
-		
+		benutzerid++;
+		System.out.println("Benutzerhinzufuegen startet");
 		/**
 		 * Füge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
 		 * setString eingefügt werden
@@ -35,22 +38,23 @@ public class StatementsDB {
 			pstmtUser.setString(9, benutzer.getLastName());
 			pstmtUser.setString(10, benutzer.getEmail());
 			
-			/* Merke:Bei einem insert ist executeUpdate() notwendig
+			/*Merke:Bei einem insert ist executeUpdate() notwendig
 			Ausführen der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
 			*/
 			int zeilen = pstmtUser.executeUpdate();
-		
 			
 			if(zeilen > 0) 
 			{
 				erfolg = true;
+				System.out.println("Erfolg beim hinzufügen der Werte!");
+				
 			}
 		} catch(SQLException e) {
 			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		// abschließend soll verbindung geschlossen werden, 
+		//abschließend soll verbindung geschlossen werden, 
 		//das wird in einem Try/Catch Block gelöst um mögliche Fehler abzufangen.
 				finally {
 					try {
@@ -60,10 +64,8 @@ public class StatementsDB {
 					+ e.toString());
 					}
 				}
-		//Hochzählen der id Variable (keine SerialID, sondern bewusst 
-		//einen Int genommen) 
+
 		//und return der variable erfolg als erfolgsmeldung
-		benutzerid++;
 		return erfolg;
 	}
 	

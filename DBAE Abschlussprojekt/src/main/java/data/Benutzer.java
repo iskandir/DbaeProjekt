@@ -69,8 +69,9 @@ public class Benutzer {
 
 	public String getPassword() {
 		//Verschlüsseln des Passworts
-		password.hashCode();
-		return password;
+		int myHash = password.hashCode();
+		String hashedPassword = String.valueOf(myHash);
+		return hashedPassword;
 	}
 
 	public void setPassword(String password) {
