@@ -3,10 +3,10 @@
 /* Navbar container */
 .navbar {
   overflow: visible;
+  z-index:999;
   background-color: #69d35d;
   font-family: Arial;
   padding: 8px; 
-  
 }
 
 /* Links inside the navbar */

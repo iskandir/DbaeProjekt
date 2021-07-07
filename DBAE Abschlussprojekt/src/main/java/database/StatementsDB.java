@@ -5,7 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import data.Benutzer;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import data.*;
 
 public class StatementsDB {
 
@@ -100,5 +104,113 @@ public class StatementsDB {
 		return sqlBenutzer;
 	}
 	
+public static Benutzer[] getBenutzer() {
+		
+		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM userdata");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Benutzer newBenutzer = new Benutzer(rs.getString(2), rs.getString(3),
+						rs.getString(4),rs.getString(5),rs.getString(6),
+						rs.getString(7),rs.getString(8),rs.getString(9)
+						,rs.getString(10));
+				benutzerListe.add(newBenutzer);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return benutzerListe.toArray( new Benutzer[benutzerListe.size()]);
+	}
+	
+	public static Produkt[] getHardware() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM hardware UNION SELECT * FROM software UNION SELECT * FROM peripherie");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
+	public static Produkt[] getSoftware() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM software");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
+	public static Produkt[] getPeripherie() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM peripherie");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+			}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
 	
 }
