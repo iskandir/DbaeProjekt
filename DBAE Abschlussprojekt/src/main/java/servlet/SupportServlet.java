@@ -20,7 +20,9 @@ import data.Ticket;
 public class SupportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	       
+	public SupportServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -32,6 +34,7 @@ public class SupportServlet extends HttpServlet {
 		String name = request.getParameter("Nachname");
 		String vorname = request.getParameter("Name");
 		
+		
 		String msg;
 		try {
 			StatementsDB.ticketHinzufügen(new Ticket(vorname, name , request.getParameter("Betreff"), request.getParameter("Email"), request.getParameter("Inhalt")));
@@ -42,6 +45,7 @@ public class SupportServlet extends HttpServlet {
 		}
 		
 		session.setAttribute("output", msg);
+		
 		
 		request.getRequestDispatcher("Erfolg.html").forward(request, response);
 	}

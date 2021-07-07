@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="WEB-INF/taglib/meineTaglibs.tld" prefix="my" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +39,7 @@
 			<textarea id="anliegenInhalt" name = "Inhalt" rows="" cols="100" maxlength="1500"></textarea>
 			
 		</div>
-         
-  
+
         <br><br>    
         <div class="box bg-1"> 
       
@@ -45,7 +48,7 @@
         <input type="submit" value="Support-Ticket abschicken">
 
         <br><br>    
- 		<input type="button" value="Zurück!" onclick="history.go(-1)">
+ 		<input type="button" value="ZurÃ¼ck!" onclick="history.go(-1)">
  		
  	</div> 
 </form>  

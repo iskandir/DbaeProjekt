@@ -102,7 +102,7 @@ public class StatementsDB {
 	public static void ticketHinzufügen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
 		con.setAutoCommit(false);
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata VALUES (?, ?, ?, ?, ?");
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
 		stTicket.setString(1, ticket.getName());
 		stTicket.setString(2, ticket.getVorname());
 		stTicket.setString(3, ticket.getMail());

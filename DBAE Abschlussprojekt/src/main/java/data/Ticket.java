@@ -1,11 +1,18 @@
 package data;
 
 public class Ticket {
+	
+	private Integer id; 
 	private String vorname;
 	private String name;
 	private String betreff;
 	private String mail;
 	private String inhalt;
+	
+	public Integer getId() {
+		//id getter, setter -> ID oder Timestamp ... Call me, Cookie
+		return id;
+	}	
 	public String getVorname() {
 		return vorname;
 	}
