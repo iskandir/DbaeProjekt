@@ -27,8 +27,10 @@
         <a href="#">Passwort vergessen</a>
         <br><br>    
  		<input type="button" value="Zurück!" onclick="history.go(-1)">
-		</form>  
+		 
 		
    </div> 
+   
+   </form> 
 </body>    
 </html>
