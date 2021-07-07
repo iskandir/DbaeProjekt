@@ -35,9 +35,8 @@
 		        <div class="col-sm-12 my-auto">
 		            <div class="card card-block w-25 mx-auto">
 						<h3>Produkte</h3>
-						
 						<form class ="products" method="POST" action=AdminCenterServlet>
-							<input type="submit" value="Details" name="productdetails"/>
+							<input type="submit" value="Produkte" name="details"/>
 						</form>
 					</div>
 		        </div>
@@ -45,16 +44,18 @@
 		        <div class="col-sm-12 my-auto">
 		            <div class="card card-block w-25 mx-auto">
 		           		<h3>Bestellungen</h3>
-		           		
-		           		<a href="">Details</a>
+						<form class ="products" method="POST" action=AdminCenterServlet>
+							<input type="submit" value="Bestellungen" name="details"/>
+						</form>
 		            </div>
 		        </div>
 		        
 		        <div class="col-sm-12 my-auto">
 		            <div class="card card-block w-25 mx-auto">
 						<h3>Kunden</h3>
-						
-						<a href="adminCenterUser.jsp">Details</a>
+						<form class ="products" method="POST" action=AdminCenterServlet>
+							<input type="submit" value="Kunden" name="details"/>
+						</form>
 					</div>
 		        </div> 
 		    </div>		    

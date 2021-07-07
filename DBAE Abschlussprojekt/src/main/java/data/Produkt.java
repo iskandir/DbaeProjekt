@@ -15,6 +15,16 @@ public class Produkt {
 	private String produktnummer;
 	private String type;
 	
+	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type) {
+		super();
+		this.titel = titel;
+		this.beschreibung = beschreibung;
+		this.preis = preis;
+		this.bild = bild;
+		this.produktnummer = produktnummer;
+		this.type = type;
+	}
+	
 	public String getTitel() {
 		return titel;
 	}
