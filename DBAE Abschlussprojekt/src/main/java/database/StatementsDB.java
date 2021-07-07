@@ -14,7 +14,7 @@ import data.*;
 public class StatementsDB {
 
 	private static Connection con = null;
-	//Hochzählen der id Variable (keine SerialID, sondern bewusst 
+	//HochzÃ¤hlen der id Variable (keine SerialID, sondern bewusst 
 	//einen Int genommen) 
 	private static int benutzerid = 1;
 	
@@ -23,14 +23,14 @@ public class StatementsDB {
 		benutzerid++;
 		System.out.println("Benutzerhinzufuegen startet");
 		/**
-		 * Füge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
-		 * setString eingefügt werden
+		 * FÃ¼ge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
+		 * setString eingefÃ¼gt werden
 		 */
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUser = con.prepareStatement("INSERT INTO userdata "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-			//Befehle zum einfügen der einzelnen Werte in die entsprechende Datenbank
+			//Befehle zum einfÃ¼gen der einzelnen Werte in die entsprechende Datenbank
 			pstmtUser.setInt(1, benutzerid);
 			pstmtUser.setString(2, benutzer.getUsername());
 			pstmtUser.setString(3, benutzer.getPassword());
@@ -43,28 +43,28 @@ public class StatementsDB {
 			pstmtUser.setString(10, benutzer.getEmail());
 			
 			/*Merke:Bei einem insert ist executeUpdate() notwendig
-			Ausführen der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
+			AusfÃ¼hren der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
 			*/
 			int zeilen = pstmtUser.executeUpdate();
 			
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufügen der Werte!");
+				System.out.println("Erfolg beim hinzufÃ¼gen der Werte!");
 				
 			}
 		} catch(SQLException e) {
-			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
+			System.err.println("Fehler beim HinzufÃ¼gen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		//abschließend soll verbindung geschlossen werden, 
-		//das wird in einem Try/Catch Block gelöst um mögliche Fehler abzufangen.
+		//abschlieÃend soll verbindung geschlossen werden, 
+		//das wird in einem Try/Catch Block gelÃ¶st um mÃ¶gliche Fehler abzufangen.
 				finally {
 					try {
 						con.close();
 					} catch (SQLException e) {
-						System.err.println("Fehler beim schließen der Datenbank" 
+						System.err.println("Fehler beim schlieÃen der Datenbank" 
 					+ e.toString());
 					}
 				}
@@ -212,5 +212,22 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+
+	public static void ticketHinzufügen(Ticket ticket) throws SQLException {
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
+		stTicket.setString(1, ticket.getName());
+		stTicket.setString(2, ticket.getVorname());
+		stTicket.setString(3, ticket.getMail());
+		stTicket.setString(4, ticket.getBetreff());
+		stTicket.setString(5, ticket.getInhalt());
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
+	
 	
 }
