@@ -18,3 +18,7 @@
 		'a2 a5'
 		'a2 a6';
 }
+
+#error {
+	color: red;
+}

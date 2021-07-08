@@ -14,7 +14,7 @@ import database.StatementsDB;
 
 import data.*;
 
-@WebServlet("/Produkte/*")
+@WebServlet("/Produkte")
 public class ProduktServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,11 +24,11 @@ public class ProduktServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String uri = request.getRequestURI();
 		Produkt produkt;
 		try {
-			produkt = StatementsDB.getProdukt(uri.substring(uri.indexOf("/Produkte/") + 10));
+			produkt = StatementsDB.getProdukt(request.getParameter("p"));
 			if (produkt == null) {
+				session.removeAttribute("produkt");
 				session.setAttribute("msg", "Das Produkt konnte leider nicht gefunden werden.");
 			} else {
 				session.removeAttribute("msg");
@@ -36,6 +36,7 @@ public class ProduktServlet extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			session.removeAttribute("produkt");
 			session.setAttribute("msg", "Es gab ein Problem beim Laden des Produktes: " + e.getMessage());
 		}
 		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
