@@ -8,6 +8,8 @@
 .type { grid-area: a6; }
 
 .grid-container {
+	background-color: black;
+	grid-gap: 1px;
 	margin: auto;
 	width: 50%;
 	display: grid;
@@ -17,6 +19,10 @@
 		'a2 a4'
 		'a2 a5'
 		'a2 a6';
+}
+
+.grid-container > div {
+	background-color: white;
 }
 
 #error {
