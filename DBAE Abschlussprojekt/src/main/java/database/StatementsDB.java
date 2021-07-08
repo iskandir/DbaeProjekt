@@ -212,6 +212,36 @@ public static Benutzer[] getBenutzer() {
 		
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
+	
+	public static Produkt getProdukt(String produktnummer) throws SQLException {
+		Produkt produkt = null;
+		Connection con = DatabaseConnection.getConnection();
+		PreparedStatement st = con.prepareStatement(
+				"SELECT * FROM hardware WHERE produktnummer = '" + produktnummer
+				+ "' UNION SELECT * FROM software WHERE produktnummer = '" + produktnummer
+				+ "' UNION SELECT * FROM peripherie WHERE produktnummer = '" + produktnummer + "';"
+		);
+		ResultSet result = st.executeQuery();
+		con.close();
+		if (result.next()) {
+			produkt = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6));
+		}
+		return produkt;
+	}
+	
+	public static Produkt getProdukt(String produktnummer, String art) throws SQLException {
+		Produkt produkt = null;
+		Connection con = DatabaseConnection.getConnection();
+		PreparedStatement st = con.prepareStatement(
+				"SELECT * FROM " + art + " WHERE produktnummer = '" + produktnummer + "';"
+		);
+		ResultSet result = st.executeQuery();
+		con.close();
+		if (result.next()) {
+			produkt = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6), art);
+		}
+		return produkt;
+	}
 
 	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
