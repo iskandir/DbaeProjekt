@@ -41,7 +41,7 @@ public class SupportServlet extends HttpServlet {
 			msg = "Ihr Ticket wird zeitnah von unserem Support mit hoher Priorität bearbeitet!!!:)";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			msg = "Ihre Anfrage konnte leider nicht gespeichert werden: ";
+			msg = "Ihre Anfrage konnte leider nicht gespeichert werden: " + e.getMessage();
 		}
 		
 		session.setAttribute("output", msg);

@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Ihre Support-Anfrage</title>
-</head>
-<body>
-	<p>${output}</p>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Ihre Support-Anfrage</title>
+	</head>
+	<body>
+		<jsp:include page="navBar.jsp"/>
+		
+		<p>${output}</p>
+	</body>
 </html>
