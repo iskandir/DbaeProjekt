@@ -144,7 +144,7 @@ public static Benutzer[] getBenutzer() {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
-				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "hardware");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
@@ -170,7 +170,7 @@ public static Benutzer[] getBenutzer() {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
-				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "software");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
@@ -196,7 +196,7 @@ public static Benutzer[] getBenutzer() {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
-				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "peripherie");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
