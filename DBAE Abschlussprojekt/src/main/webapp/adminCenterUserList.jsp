@@ -26,7 +26,7 @@
 		                <th scope="col">Stadt</th>
 		            </tr>
 	            </thead>
-	            <tbody style="font-size: 10px;">
+	            <tbody style="font-size: 12px;">
 	            	<c:forEach var="benutzer" items="${benutzerliste}">
 		                <tr>
 		                    <td><c:out value="${benutzer.username}" /></td>

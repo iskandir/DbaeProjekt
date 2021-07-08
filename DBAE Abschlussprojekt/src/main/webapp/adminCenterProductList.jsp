@@ -18,21 +18,22 @@
 		            <tr>
 		                <th scope="col">Titel</th>
 		                <th scope="col">Beschreibung</th>
-		                <th scope="col">Preis (EUR)</th>
+		                <th scope="col">Preis</th>
 		                <th scope="col">Bild</th>
-		                <th scope="col">Produktnummer</th>
+		                <th scope="col">ProduktNr</th>
 		                <th scope="col">Typ</th>
 		            </tr>
 	            </thead>
-	            <tbody style="font-size: 10px;">
+	            <tbody style="font-size: 12px;">
 	            	<c:forEach var="produkt" items="${hardwareListe}">
 		                <tr>
 		                    <td><c:out value="${produkt.titel}" /></td>
 		                    <td><c:out value="${produkt.beschreibung}" /></td>
-		                    <td><c:out value="${produkt.preis}" /></td>
-		                    <td><a href="${produkt.bild}" target=â€_blankâ€>Bild</a></td>
+		                    <td><c:out value="${produkt.preis} EUR" /></td>
+		                    <td><a href="${produkt.bild}" target="_blank"€>Bild</a></td>
 		                    <td><c:out value="${produkt.produktnummer}" /></td>
 		                    <td><c:out value="${produkt.type}" /></td>
+		                    <td><c:out value="${produkt.art}" /></td>
 		                    
 		                </tr>
 	            	</c:forEach>
@@ -43,13 +44,13 @@
 		            <tr>
 		                <th scope="col">Titel</th>
 		                <th scope="col">Beschreibung</th>
-		                <th scope="col">Preis (EUR)</th>
+		                <th scope="col">Preis</th>
 		                <th scope="col">Bild</th>
-		                <th scope="col">Produktnummer</th>
+		                <th scope="col">ProduktNr</th>
 		                <th scope="col">Typ</th>
 		            </tr>
 	            </thead>
-	            <tbody style="font-size: 10px;">
+	            <tbody style="font-size: 12px;">
 	            	<c:forEach var="produkt" items="${softwareListe}">
 		                <tr>
 		                    <td><c:out value="${produkt.titel}" /></td>
@@ -68,13 +69,13 @@
 		            <tr>
 		                <th scope="col">Titel</th>
 		                <th scope="col">Beschreibung</th>
-		                <th scope="col">Preis (EUR)</th>
+		                <th scope="col">Preis</th>
 		                <th scope="col">Bild</th>
-		                <th scope="col">Produktnummer</th>
+		                <th scope="col">ProduktNr</th>
 		                <th scope="col">Typ</th>
 		            </tr>
 	            </thead>
-	            <tbody style="font-size: 10px;">
+	            <tbody style="font-size: 12px;">
 	            	<c:forEach var="produkt" items="${peripherieListe}">
 		                <tr>
 		                    <td><c:out value="${produkt.titel}" /></td>

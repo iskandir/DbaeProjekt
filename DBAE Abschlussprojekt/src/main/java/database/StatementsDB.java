@@ -1,6 +1,7 @@
 package database;
 
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -229,5 +230,23 @@ public static Benutzer[] getBenutzer() {
 		con.close();
 	}
 	
+	public static void bestellungHinzufuegen(Bestellung bestellung) throws SQLException {
+		
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		
+		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
+		
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (bestellnummer, gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?, ?);");
+		stTicket.setInt(1, bestellung.getBestellnummer());
+		stTicket.setDouble(2, bestellung.getGesamtbetrag());
+		stTicket.setString(3, bestellung.getMail());
+		stTicket.setArray(4, tempArray);
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
 	
 }
