@@ -26,6 +26,10 @@
 	</head>
 	<body>
 		<jsp:include page="navBar.jsp"/>
+		
+		<form class="test" method="POST" action=BestellungServlet>
+			<input type="submit" value="Bestellung" name =""/>
+		</form>
 		  		
 		<div class="container-fluid">
 			

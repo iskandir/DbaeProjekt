@@ -237,11 +237,11 @@ public static Benutzer[] getBenutzer() {
 		
 		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
 		
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (bestellnummer, gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?, ?);");
-		stTicket.setInt(1, bestellung.getBestellnummer());
-		stTicket.setDouble(2, bestellung.getGesamtbetrag());
-		stTicket.setString(3, bestellung.getMail());
-		stTicket.setArray(4, tempArray);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?);");
+		
+		stTicket.setDouble(1, bestellung.getGesamtbetrag());
+		stTicket.setString(2, bestellung.getMail());
+		stTicket.setArray(3, tempArray);
 		stTicket.executeUpdate();
 		
 		con.commit();
