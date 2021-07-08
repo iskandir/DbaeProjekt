@@ -140,7 +140,7 @@ public static Benutzer[] getBenutzer() {
 		
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement what = con.prepareStatement("SELECT * FROM hardware UNION SELECT * FROM software UNION SELECT * FROM peripherie");
+			PreparedStatement what = con.prepareStatement("SELECT * FROM hardware");
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
