@@ -47,7 +47,7 @@ public class SupportServlet extends HttpServlet {
 		session.setAttribute("output", msg);
 		
 		
-		request.getRequestDispatcher("Erfolg.html").forward(request, response);
+		request.getRequestDispatcher("Erfolg.jsp").forward(request, response);
 	}
 
 }
