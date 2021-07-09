@@ -1,16 +1,21 @@
 package database;
 
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import data.Benutzer;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import data.*;
 
 public class StatementsDB {
 
 	private static Connection con = null;
-	//Hochzählen der id Variable (keine SerialID, sondern bewusst 
+	//HochzÃ¤hlen der id Variable (keine SerialID, sondern bewusst 
 	//einen Int genommen) 
 	private static int benutzerid = 0;
 	
@@ -19,14 +24,14 @@ public class StatementsDB {
 		benutzerid++;
 		System.out.println("Benutzerhinzufuegen startet");
 		/**
-		 * Füge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
-		 * setString eingefügt werden
+		 * FÃ¼ge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
+		 * setString eingefÃ¼gt werden
 		 */
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUser = con.prepareStatement("INSERT INTO userdata "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-			//Befehle zum einfügen der einzelnen Werte in die entsprechende Datenbank
+			//Befehle zum einfÃ¼gen der einzelnen Werte in die entsprechende Datenbank
 			pstmtUser.setInt(1, benutzerid);
 			pstmtUser.setString(2, benutzer.getUsername());
 			pstmtUser.setString(3, benutzer.getPassword());
@@ -39,28 +44,28 @@ public class StatementsDB {
 			pstmtUser.setString(10, benutzer.getEmail());
 			
 			/*Merke:Bei einem insert ist executeUpdate() notwendig
-			Ausführen der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
+			AusfÃ¼hren der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
 			*/
 			int zeilen = pstmtUser.executeUpdate();
 			
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufügen der Werte!");
+				System.out.println("Erfolg beim hinzufÃ¼gen der Werte!");
 				
 			}
 		} catch(SQLException e) {
-			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
+			System.err.println("Fehler beim HinzufÃ¼gen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		//abschließend soll verbindung geschlossen werden, 
-		//das wird in einem Try/Catch Block gelöst um mögliche Fehler abzufangen.
+		//abschlieÃend soll verbindung geschlossen werden, 
+		//das wird in einem Try/Catch Block gelÃ¶st um mÃ¶gliche Fehler abzufangen.
 				finally {
 					try {
 						con.close();
 					} catch (SQLException e) {
-						System.err.println("Fehler beim schließen der Datenbank" 
+						System.err.println("Fehler beim schlieÃen der Datenbank" 
 					+ e.toString());
 					}
 				}
@@ -100,5 +105,178 @@ public class StatementsDB {
 		return sqlBenutzer;
 	}
 	
+public static Benutzer[] getBenutzer() {
+		
+		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM userdata");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Benutzer newBenutzer = new Benutzer(rs.getString(2), rs.getString(3),
+						rs.getString(4),rs.getString(5),rs.getString(6),
+						rs.getString(7),rs.getString(8),rs.getString(9)
+						,rs.getString(10));
+				benutzerListe.add(newBenutzer);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return benutzerListe.toArray( new Benutzer[benutzerListe.size()]);
+	}
+	
+	public static Produkt[] getHardware() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM hardware");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "hardware");
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
+	public static Produkt[] getSoftware() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM software");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "software");
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
+	public static Produkt[] getPeripherie() {
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM peripherie");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "peripherie");
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+			}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
+	
+	public static Produkt getProdukt(String produktnummer) throws SQLException {
+		Produkt produkt = null;
+		Connection con = DatabaseConnection.getConnection();
+		PreparedStatement st = con.prepareStatement(
+				"SELECT * FROM hardware WHERE produktnummer = '" + produktnummer
+				+ "' UNION SELECT * FROM software WHERE produktnummer = '" + produktnummer
+				+ "' UNION SELECT * FROM peripherie WHERE produktnummer = '" + produktnummer + "';"
+		);
+		ResultSet result = st.executeQuery();
+		con.close();
+		if (result.next()) {
+			produkt = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6));
+		}
+		return produkt;
+	}
+	
+	public static Produkt getProdukt(String produktnummer, String art) throws SQLException {
+		Produkt produkt = null;
+		Connection con = DatabaseConnection.getConnection();
+		PreparedStatement st = con.prepareStatement(
+				"SELECT * FROM " + art + " WHERE produktnummer = '" + produktnummer + "';"
+		);
+		ResultSet result = st.executeQuery();
+		con.close();
+		if (result.next()) {
+			produkt = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6), art);
+		}
+		return produkt;
+	}
+
+	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO supportdata (nachname, vorname, email, betreff, inhalt) VALUES (?, ?, ?, ?, ?);");
+		stTicket.setString(1, ticket.getName());
+		stTicket.setString(2, ticket.getVorname());
+		stTicket.setString(3, ticket.getMail());
+		stTicket.setString(4, ticket.getBetreff());
+		stTicket.setString(5, ticket.getInhalt());
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
+	
+	public static void bestellungHinzufuegen(Bestellung bestellung) throws SQLException {
+		
+		Connection con = DatabaseConnection.getConnection();
+		con.setAutoCommit(false);
+		
+		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
+		
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?);");
+		
+		stTicket.setDouble(1, bestellung.getGesamtbetrag());
+		stTicket.setString(2, bestellung.getMail());
+		stTicket.setArray(3, tempArray);
+		stTicket.executeUpdate();
+		
+		con.commit();
+		con.setAutoCommit(true);
+		con.close();
+	}
 	
 }

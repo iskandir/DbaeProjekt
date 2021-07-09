@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.titel { grid-area: a1; }
+.bild { grid-area: a2; }
+.beschreibung { grid-area: a3; }
+.preis { grid-area: a4; }
+.produktnummer { grid-area: a5; }
+.type { grid-area: a6; }
+
+.grid-container {
+	background-color: black;
+	grid-gap: 1px;
+	margin: auto;
+	width: 50%;
+	display: grid;
+	grid-template-areas:
+		'a1 a1'
+		'a2 a3'
+		'a2 a4'
+		'a2 a5'
+		'a2 a6';
+}
+
+.grid-container > div {
+	background-color: white;
+}
+
+#error {
+	color: red;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<taglib>
+<!-- Initialisierung / "Grundgerüst"-->
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>CustomTaglibs</short-name>
+
+<!-- Initialisierung unseres ersten Tags -->
+	<tag>
+	<!-- Wenn ein Tag Benutzer gefunden wird, gehe in die Klasse tags.BenutzerTag -->
+		<name>Benutzer</name>
+		<tag-class> tags.BenutzerTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<!-- Wenn ein Tag Nav gefunden wird, gehe in die Klasse tags.NavigationTag -->
+	<tag>
+		<name>Nav</name>
+		<tag-class>tags.NavigationTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+</taglib>
+
+
