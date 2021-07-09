@@ -17,7 +17,7 @@ public class StatementsDB {
 	private static Connection con = null;
 	//HochzÃ¤hlen der id Variable (keine SerialID, sondern bewusst 
 	//einen Int genommen) 
-	private static int benutzerid = 1;
+	private static int benutzerid = 0;
 	
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
