@@ -61,15 +61,17 @@ public class RegistrierungsServlet extends HttpServlet {
 		 */
 			if(benutzer.getEmail().length() >= 5)
 			{
-				System.out.println("Email is zu kurz!");
+				System.out.println("Email ist lang genug !");
 				/** Prüfe ob Passwörter gleich sind
 				 * 
 				 */
 				if(password.equals(passwordWdh))
 				{
+					System.out.println("PW wdhl gleich pwdw.");
 					//Prüfe ob StatementsDB.benutzerHinzufuegen true, dann setze Attribute und gehe auf die index.jsp
 					if(StatementsDB.benutzerHinzufuegen(benutzer))
 					{
+						System.out.println("starte");
 						HttpSession session = request.getSession();
 						session.setAttribute("benutzer",  benutzer);
 						request.getRequestDispatcher("index.jsp").forward(request, response);
