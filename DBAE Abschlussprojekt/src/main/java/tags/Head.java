@@ -68,7 +68,7 @@ private String username;
 					+ "</button>\n"
 					+ "<div class=\"dropdown-content\">\n"
 					+ "<a href=\"login.jsp\">Login</a>\n"
-					+ "<a href=\"#\">Registrierung</a>\n"
+					+ "<a href=\"registrierung.jsp\">Registrierung</a>\n"
 					+ "<a href=\"supportForm.jsp\">Support</a>"
 					+ "</div>\n"
 					+ "</div> \n"
