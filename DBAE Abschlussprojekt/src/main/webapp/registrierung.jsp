@@ -12,7 +12,7 @@
 	<div class="container">
 
 		<form class="registrierung" method="POST" action="RegistrierungsServlet">
-		
+		<!-- TODO: Prüfen ob ALLE inputs required waren!! -->
 			<h1>Registrierung</h1>
 			<hr>
 			<h2>Nutzerdaten</h2>
@@ -48,7 +48,6 @@
 			
 			<label for="city"><b>Stadt</b></label>
 			<input type="text" placeholder="Stadt" name="city" id="city" required>
-		
 			<p>
 				Mit Erstellung des Accounts stimmst du allen <a href="#">Datenschutzbestimmungen</a>
 				zu.

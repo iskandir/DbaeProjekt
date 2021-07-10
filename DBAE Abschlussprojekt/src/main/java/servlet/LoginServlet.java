@@ -27,10 +27,14 @@ public class LoginServlet extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
+		System.out.println("DOPOST: \n username " + username + "\n password "
+				+ password);
 		benutzer = new Benutzer(username,password);
-		System.out.println("Username is:");
-		System.out.println("Loginname:" + username + " Password:" + password);
+		System.out.println();
+		String encrypt = benutzer.encryptPassword(password);
+		benutzer.setPassword(encrypt);
+		
 		
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(benutzer);
 		

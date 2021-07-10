@@ -41,13 +41,26 @@ public class RegistrierungsServlet extends HttpServlet {
 		String postalcode = request.getParameter("postalcode");
 		String city = request.getParameter("city");
 
-		benutzer = new Benutzer(username, email, password, street, housenmb,
-				postalcode, city, firstname, lastname);
+		benutzer = new Benutzer(username, password, street, housenmb, postalcode,
+				city, firstname, lastname, email);
+		
+		String encrypt = benutzer.encryptPassword(password);
+		benutzer.setPassword(encrypt);
+		System.out.println("Loginname:" + username + 
+				" Password:" + benutzer.getPassword());
+		
+		
 
-		System.out.println("Username: " + username + " \nFirstname: " + firstname 
-				+ "\nLastname:" + lastname + "\nEmail:" + email + "\nPw:" + password
-				+ "\nPwwdh:" + passwordWdh + "\nStreet:" + street + "\nHousenmb:" +
-				housenmb + "\nPostalcode:" + postalcode + "\nCity:" + city);
+		System.out.println("Username: " + benutzer.getUsername() 
+				+" \nFirstname: " + benutzer.getFirstName() 
+				+ "\nLastname:" + benutzer.getLastName() 
+				+ "\nEmail:" + benutzer.getEmail() 
+				+ "\nPw:" + benutzer.getPassword()
+				+ "\nPwwdh:" + passwordWdh 
+				+ "\nStreet:" + benutzer.getStreet() 
+				+ "\nHousenmb:" + benutzer.getHousenmb() 
+				+ "\nPostalcode:" + benutzer.getPostalcode() 
+				+ "\nCity:" + benutzer.getCity());
 		
 		
 		//Prüfe ob Passwörter-Spalte leer sind

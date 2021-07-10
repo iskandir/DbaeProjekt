@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,9 +18,42 @@ public class StatementsDB {
 	//einen Int genommen) 
 	private static int benutzerid = 0;
 	
+	private static Integer countUser() {
+		ResultSet rs = null;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int numberOfRows = 0;
+	    try {
+	      conn = DatabaseConnection.getConnection();
+	      String query = "select count(*) from userdata";
+	      pstmt = conn.prepareStatement(query);
+	      rs = pstmt.executeQuery();
+	      if (rs.next()) {
+	        numberOfRows = rs.getInt(1);
+	        System.out.println("numberOfRows= " + numberOfRows);
+	      } else {
+	        System.out.println("Error: Konnte die Anzahl der User nicht auslesen");
+	      }
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	      try {
+	        rs.close();
+	        pstmt.close();
+	        conn.close();
+	      } catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+	    }
+		return numberOfRows;
+	  }
+		
+	
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
-		benutzerid++;
+		benutzerid = countUser() + 1;
+		System.out.println("BenutzerId ist " + benutzerid);
+		
 		System.out.println("Benutzerhinzufuegen startet");
 		/**
 		 * FÃ¼ge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
@@ -31,7 +63,7 @@ public class StatementsDB {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUser = con.prepareStatement("INSERT INTO userdata "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-			//Befehle zum einfÃ¼gen der einzelnen Werte in die entsprechende Datenbank
+			//Befehle zum einfügen der einzelnen Werte in die entsprechende Datenbank
 			pstmtUser.setInt(1, benutzerid);
 			pstmtUser.setString(2, benutzer.getUsername());
 			pstmtUser.setString(3, benutzer.getPassword());
@@ -80,17 +112,17 @@ public class StatementsDB {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUserLogin = con.prepareStatement("SELECT *"
-					+ " FROM userdata WHERE benutzer.email LIKE ? and "
+					+ " FROM userdata WHERE username LIKE ? and "
 					+ "password LIKE ?");
-			pstmtUserLogin.setString(1, benutzer.getEmail());
+			System.out.println("BenutzerPw: \n" + benutzer.getPassword() + 
+					"\nBenutzerUsername:\n" + benutzer.getUsername());
+			pstmtUserLogin.setString(1, benutzer.getUsername());
 			pstmtUserLogin.setString(2, benutzer.getPassword());
 			ResultSet rs = pstmtUserLogin.executeQuery();
 			
 			if(rs.next()) {
-				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3),
-						rs.getString(4),rs.getString(5),rs.getString(6),
-						rs.getString(7),rs.getString(8),rs.getString(9)
-						,rs.getString(10));
+				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3));
+				System.out.println("User ist in der Datenbank vorhanden");
 			}
 		} catch (SQLException e) {
 			System.err.println("SQL Fehler - User nicht gefunden!");
@@ -105,7 +137,7 @@ public class StatementsDB {
 		return sqlBenutzer;
 	}
 	
-public static Benutzer[] getBenutzer() {
+	public static Benutzer[] getBenutzer() {
 		
 		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
 		
@@ -278,5 +310,6 @@ public static Benutzer[] getBenutzer() {
 		con.setAutoCommit(true);
 		con.close();
 	}
+	
 	
 }
