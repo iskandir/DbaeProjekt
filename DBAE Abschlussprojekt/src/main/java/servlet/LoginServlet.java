@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.Benutzer;
+import data.Bestellung;
 import database.StatementsDB;
 
 /**
@@ -20,7 +23,21 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("Username", benutzer.getUsername());
+		session.setAttribute("Adresse", benutzer.getStreet() 
+				+ benutzer.getHousenmb() 
+				+ benutzer.getPostalcode() 
+				+ benutzer.getCity());
+		
+		//session.setAttribute("Warenkorb", getWarenkorb);
+		
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,16 +51,22 @@ public class LoginServlet extends HttpServlet {
 		System.out.println();
 		String encrypt = benutzer.encryptPassword(password);
 		benutzer.setPassword(encrypt);
-		
-		
+				
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(benutzer);
 		
-		//case 1 - Logge Nutzer ein und gehe zurück zur Startseite
+		//case 1 - Logge Nutzer ein, erstelle eine Session und gehe zurück zur Startseite
 		//case 2 - gib Fehlermeldung aus und bleibe bei Login
 		
 		if(sqlBenutzer != null) {
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("benutzer", benutzer);
+			session.setAttribute("username", benutzer);
+			session.setAttribute("Adresse", benutzer.getStreet() 
+				+ benutzer.getHousenmb() 
+				+ benutzer.getPostalcode() 
+				+ benutzer.getCity());
+			//session.setAttribute("Warenkorb", getWarenkorb);
+			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.setAttribute("error", "Kombination aus Email "

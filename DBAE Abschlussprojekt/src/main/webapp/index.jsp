@@ -1,3 +1,5 @@
+<%@ taglib uri="WEB-INF/taglibs/logintags.tld" prefix="log" %>
+
 <!DOCTYPE>
 <html>
     <head>
@@ -53,9 +55,9 @@
       </nav>
 
     <div class="container">
-        <br>
-        <h1>Willkommen!</h1>
-        <button>CLICK ME!</button>
+    	<log:Login/>
+    	
+        
     </div>
       </body>
  

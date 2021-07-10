@@ -1,3 +1,4 @@
+<%@ taglib uri="WEB-INF/taglibs/headertags.tld" prefix="head" %>
 <!DOCTYPE>
 <html>
     <head>
@@ -24,33 +25,7 @@
 					</div>
 				</form> 
 				<!--Menu upper-right corner-->
-				<div class="btn-group" role="group">
-					<div class="navbar-nav ml-auto">
-						<div class="dropdown">
-							<button class="dropbtn"><img src="pictures/buyerIcon.png" alt="Käufer" width="20" height="20"><span class="float-right">Käufer</span>
-								<i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="login.jsp">Login</a>
-								<a href="#">Kundenkonto erstellen</a>
-								<a href="#">Mein Konto</a>
-								<a href="#">Persönliche Daten</a>
-								<a href="supportForm.jsp">Support</a>
-							</div>
-						</div> 
-					</div> 
-					<div class="navbar-nav ml-auto">
-						<div class="dropdown">
-							<button class="dropbtn"><img src="pictures/adminLog.png" alt="Administrator" width="20" height="20"><span class="float-right">Administrator</span> 
-								<i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="login.jsp">Login</a>
-								<a href="adminCenter.jsp">Admin Center</a>
-							</div>
-						</div> 
-					</div> 
-				</div>  
+				<head:Header/>
 			</nav>
 		</div>
     </body>
