@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.*;
 import database.StatementsDB;
@@ -44,10 +45,16 @@ public class BestellungServlet extends HttpServlet {
 		//Double wird nicht richtig in DB eingetragen....? 
 		//wo bekomme ich die Daten her? Produktdaten -> Session? Userdaten???(Dennis)
 		
+		HttpSession session = request.getSession();
+		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
+		
+		
+		
 		
 		try {
 			String[] produktnummern = {"1", "2"}; 
-			StatementsDB.bestellungHinzufuegen(new Bestellung(4, 1.5, "email", produktnummern));
+			//StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
+			StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), "", "", "", ""));
 		} catch (SQLException e) {
 			
 		}

@@ -312,11 +312,17 @@ public class StatementsDB {
 		
 		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
 		
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?);");
+		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 		
 		stTicket.setDouble(1, bestellung.getGesamtbetrag());
-		stTicket.setString(2, bestellung.getMail());
-		stTicket.setArray(3, tempArray);
+		stTicket.setArray(2, tempArray);
+		stTicket.setString(3, bestellung.getVorname());
+		stTicket.setString(4, bestellung.getNachname());
+		stTicket.setString(5, bestellung.getStrasse());
+		stTicket.setString(6, bestellung.getHausnummer());
+		stTicket.setString(7, bestellung.getPostleitzahl());
+		stTicket.setString(8, bestellung.getStadt());
+		
 		stTicket.executeUpdate();
 		
 		con.commit();

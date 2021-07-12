@@ -26,15 +26,8 @@
 	</head>
 	<body>
 		<jsp:include page="navBar.jsp"/>
-		
-		<form class="test" method="POST" action=BestellungServlet>
-			<input type="submit" value="Bestellung" name =""/>
-		</form>
 		  		
 		<div class="container-fluid">
-			
-			<!-- Kunden, Bestellungen, Produkte -->
-			
 			<div class="row h-50">
 		        <div class="col-sm-12 my-auto">
 		            <div class="card card-block w-25 mx-auto">
