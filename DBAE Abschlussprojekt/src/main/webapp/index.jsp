@@ -1,10 +1,9 @@
+<%@ taglib uri="WEB-INF/taglibs/logintags.tld" prefix="log" %>
+
 <!DOCTYPE>
 <html>
     <head>
-        <!--Auflistung der Autoren-->
-        <meta name="authorOne" content="Dennis Hasselbusch">
-        <meta name="authorTwo" content="Marten Kracke">
-        <meta name="authorThree" content="Clemens Beck">
+        <meta name="author" content="Dennis Hasselbusch">
 
         <!--Beschreibung der Seite-->
         <meta name="description" content="DBAE Abschlussprojekt">
@@ -53,9 +52,9 @@
       </nav>
 
     <div class="container">
-        <br>
-        <h1>Willkommen!</h1>
-        <button>CLICK ME!</button>
+    	<log:Login/>
+    	
+        
     </div>
       </body>
  
