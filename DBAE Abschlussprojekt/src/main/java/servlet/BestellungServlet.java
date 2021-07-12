@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,17 +47,31 @@ public class BestellungServlet extends HttpServlet {
 		//wo bekomme ich die Daten her? Produktdaten -> Session? Userdaten???(Dennis)
 		
 		HttpSession session = request.getSession();
-		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
 		
 		
-		
+		Benutzer tempBenutzer = null;
+		String username = null;
+		Benutzer benutzer = null;
 		
 		try {
-			String[] produktnummern = {"1", "2"}; 
-			//StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
-			StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), "", "", "", ""));
-		} catch (SQLException e) {
-			
+			tempBenutzer = (Benutzer) session.getAttribute("username");
+			username = tempBenutzer.getUsername();
+			benutzer = StatementsDB.getBenutzerDaten(username);
+		} catch (NullPointerException e) {
+			System.err.println(e.toString());
+
 		}
+		
+		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
+		
+		String[] produktnummern = new String[produkte.size()];
+		for(int i=0; i<produktnummern.length; i++) {
+			Produkt tempProdukt = produkte.get(i);
+			produktnummern[i] = tempProdukt.getProduktnummer();
+			
+			System.out.println(tempProdukt.getProduktnummer());
+		}
+		
+		StatementsDB.bestellungHinzufuegen(new Bestellung(1, 1.5, produktnummern, benutzer.getUsername(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
 	}
 }

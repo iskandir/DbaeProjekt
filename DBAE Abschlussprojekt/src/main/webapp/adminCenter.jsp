@@ -55,7 +55,16 @@
 						</form>
 					</div>
 		        </div> 
-		    </div>		    
+	        	        
+		        <div class="col-sm-12 my-auto">
+		            <div class="card card-block w-25 mx-auto">
+		           		<h3>Warenkorb</h3>
+						<form class ="products" method="POST" action=WarenkorbServlet>
+							<input type="submit" value="Warenkorb" name="details"/>
+						</form>
+		            </div>
+		        </div>
+			  </div>
 		</div>
 	</body>
 </html>

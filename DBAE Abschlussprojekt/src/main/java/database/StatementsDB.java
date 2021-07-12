@@ -180,6 +180,31 @@ public class StatementsDB {
 		return benutzerListe.toArray( new Benutzer[benutzerListe.size()]);
 	}
 	
+	public static Benutzer getBenutzerDaten(String username) {
+		
+		Benutzer benutzer = null;
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement st = con.prepareStatement("SELECT * FROM userdata WHERE username = '" + username + "';");
+			ResultSet result = st.executeQuery();
+			
+			if (result.next()) {
+				benutzer = new Benutzer(result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8), result.getString(9), result.getString(10));
+			}
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println(e.toString());
+			}
+		}
+		
+		return benutzer;
+	}
+	
 	public static Produkt[] getHardware() {
 		
 		List<Produkt> produktListe = new ArrayList<Produkt>();
@@ -305,30 +330,34 @@ public class StatementsDB {
 		con.close();
 	}
 	
-	public static void bestellungHinzufuegen(Bestellung bestellung) throws SQLException {
+	public static void bestellungHinzufuegen(Bestellung bestellung) {
+		try {
+			con = DatabaseConnection.getConnection();
+			
+			Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
+			
+			PreparedStatement stBestellung = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			stBestellung.setDouble(1, bestellung.getGesamtbetrag());
+			stBestellung.setArray(2, tempArray);
+			stBestellung.setString(3, bestellung.getVorname());
+			stBestellung.setString(4, bestellung.getNachname());
+			stBestellung.setString(5, bestellung.getStrasse());
+			stBestellung.setString(6, bestellung.getHausnummer());
+			stBestellung.setString(7, bestellung.getPostleitzahl());
+			stBestellung.setString(8, bestellung.getStadt());
+			
+			stBestellung.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
 		
-		Connection con = DatabaseConnection.getConnection();
-		con.setAutoCommit(false);
-		
-		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
-		
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
-		
-		stTicket.setDouble(1, bestellung.getGesamtbetrag());
-		stTicket.setArray(2, tempArray);
-		stTicket.setString(3, bestellung.getVorname());
-		stTicket.setString(4, bestellung.getNachname());
-		stTicket.setString(5, bestellung.getStrasse());
-		stTicket.setString(6, bestellung.getHausnummer());
-		stTicket.setString(7, bestellung.getPostleitzahl());
-		stTicket.setString(8, bestellung.getStadt());
-		
-		stTicket.executeUpdate();
-		
-		con.commit();
-		con.setAutoCommit(true);
-		con.close();
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+		}
 	}
-	
-	
 }
