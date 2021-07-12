@@ -22,6 +22,7 @@ public class Benutzer {
 	private String lastName;
 	private String email;
 	
+	
 	/** Konstruktor zum anlegen eines neuen Benutzers
 	 * 
 	 * @param email

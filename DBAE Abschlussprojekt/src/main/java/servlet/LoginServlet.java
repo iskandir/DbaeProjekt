@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.Benutzer;
-import data.Bestellung;
 import database.StatementsDB;
 
 /**
@@ -25,16 +23,12 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
-		PrintWriter out = response.getWriter();
-		
 		HttpSession session = request.getSession();
 		session.setAttribute("Username", benutzer.getUsername());
 		session.setAttribute("Adresse", benutzer.getStreet() 
 				+ benutzer.getHousenmb() 
 				+ benutzer.getPostalcode() 
 				+ benutzer.getCity());
-		
-		//session.setAttribute("Warenkorb", getWarenkorb);
 		
 		
 		
@@ -70,7 +64,8 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.setAttribute("error", "Kombination aus Email "
-					+ "und pw stimmen nicht überein!");
+					+ "und pw stimmen nicht überein!!");
+			
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 		

@@ -23,15 +23,20 @@ public class Login extends SimpleTagSupport {
 		HttpSession session = request.getSession();
 		
 		Benutzer benutzer = null;			
+
 		try {
 			benutzer = (Benutzer)session.getAttribute("username");
 			username = benutzer.getUsername();
+			
+			
 		} catch (NullPointerException npe) {
 			System.err.println("NullPointerException " + npe.toString());
+
 		}
 		
-		if(username != null) {
+		if(username != null && benutzer != null) {
 			//if user is logged in...
+			
 			out.print("<p> Hallo, " +  benutzer.getUsername()+ " !");
 		} else {
 			
@@ -42,5 +47,6 @@ public class Login extends SimpleTagSupport {
 		}
 		
 	}
+
 	
 }

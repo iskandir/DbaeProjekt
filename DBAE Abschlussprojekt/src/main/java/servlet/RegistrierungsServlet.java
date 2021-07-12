@@ -69,10 +69,10 @@ public class RegistrierungsServlet extends HttpServlet {
 			System.out.println("Pw is empty!");			
 		} 
 		else
-		/** Prüfe länge der Email >= 5 , denn alle Mails < 5 sind nicht in korrektem Format.
+		/** Prüfe länge der Email >= 8 , denn alle Mails < 5 sind nicht in korrektem Format.
 		 * 
 		 */
-			if(benutzer.getEmail().length() >= 5)
+			if(benutzer.getEmail().length() >= 8)
 			{
 				System.out.println("Email ist lang genug !");
 				/** Prüfe ob Passwörter gleich sind
@@ -91,20 +91,20 @@ public class RegistrierungsServlet extends HttpServlet {
 					} 
 					else
 					{
-						request.setAttribute("error", "Benutzer konnte nicht registriert werden");
+						request.setAttribute("error", "Benutzer konnte nicht registriert werden!");
 						request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 					}
 				}
 				else
 				{
-					request.setAttribute("error", "Passwörter nicht identisch");
+					request.setAttribute("error", "Passwörter nicht identisch!");
 					request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 				}
 			}
 			else
 			{
-				request.setAttribute("error", "Email Adresse ist nicht mind. 5 Zeichen lang.");
-				request.getRequestDispatcher("registrierung.jsp").forward(request, response);;
+				request.setAttribute("error", "Email Adresse ist nicht mind. 8 Zeichen lang!");
+				request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 			}
 		
 		

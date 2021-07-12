@@ -83,11 +83,11 @@ public class StatementsDB {
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufÃ¼gen der Werte!");
+				System.out.println("Erfolg beim hinzufü¼gen der Werte!");
 				
 			}
 		} catch(SQLException e) {
-			System.err.println("Fehler beim HinzufÃ¼gen der Benutzer mittels"
+			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
@@ -97,7 +97,7 @@ public class StatementsDB {
 					try {
 						con.close();
 					} catch (SQLException e) {
-						System.err.println("Fehler beim schlieÃen der Datenbank" 
+						System.err.println("Fehler beim schließen der Datenbank" 
 					+ e.toString());
 					}
 				}
@@ -114,15 +114,18 @@ public class StatementsDB {
 			PreparedStatement pstmtUserLogin = con.prepareStatement("SELECT *"
 					+ " FROM userdata WHERE username LIKE ? and "
 					+ "password LIKE ?");
-			System.out.println("BenutzerPw: \n" + benutzer.getPassword() + 
-					"\nBenutzerUsername:\n" + benutzer.getUsername());
+
 			pstmtUserLogin.setString(1, benutzer.getUsername());
 			pstmtUserLogin.setString(2, benutzer.getPassword());
 			ResultSet rs = pstmtUserLogin.executeQuery();
 			
+
+			
 			if(rs.next()) {
 				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3));
-				System.out.println("User ist in der Datenbank vorhanden");
+				System.out.println("User ist mit den Logindaten"
+						+ " in der Datenbank vorhanden");
+				return sqlBenutzer;
 			}
 		} catch (SQLException e) {
 			System.err.println("SQL Fehler - User nicht gefunden!");
@@ -131,10 +134,10 @@ public class StatementsDB {
 				con.close();
 			} catch(SQLException e) {
 				System.err.println("SQL Fehler - Verbindung konnte nicht "
-						+ "geschlossen werden;");
+						+ "geschlossen werden");
 			}
 		}
-		return sqlBenutzer;
+		return null;
 	}
 	
 	public static Benutzer[] getBenutzer() {
