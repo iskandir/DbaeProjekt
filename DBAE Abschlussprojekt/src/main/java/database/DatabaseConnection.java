@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 /** Allgemeine Daten für die Datenbank Zugriffe
  * 
- * @author Clemens Bleck, Dennis Hasselbusch, Marten Kracke
+ * @author dennishasselbusch
  *
  */
 public class DatabaseConnection {
@@ -19,7 +19,7 @@ public class DatabaseConnection {
 	private static final String DB_PASSWORD= "cb5bdbc04bbb89481626f7ced88e229f";
 	private static final String DB_DRIVER= "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://" + DB_SERVER + "/" + DB_NAME;
-	/**Initialisierung der Verbindung
+	/** Initialisierung der Verbindung
 	 * 
 	 * @return
 	 * @throws SQLException

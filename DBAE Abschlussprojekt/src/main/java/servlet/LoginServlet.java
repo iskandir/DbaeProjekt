@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,39 +12,69 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**
- * Servlet implementation class LoginServlet
+/**LoginServlet welches gebraucht wird um das Login der Nutzer abzuarbeiten
+ * 
+ * @author dennishasselbusch
+ *
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
        
+	/**Methode mit der man alle Attribute des Benutzers auslesen kann
+	 * @author dennishasselbusch
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		response.setContentType("text/html");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("Username", benutzer.getUsername());
+		session.setAttribute("Adresse", benutzer.getStreet() 
+				+ benutzer.getHousenmb() 
+				+ benutzer.getPostalcode() 
+				+ benutzer.getCity());
+		
+		
+		
 	}
-
+	/** Wird benötigt um den
+	 * Benutzer einzuloggen, dass Passwort zu hashen und mit der Datenbank
+	 * abzugleichen. 
+	 * @author dennishasselbusch
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
+		System.out.println("DOPOST: \n username " + username + "\n password "
+				+ password);
 		benutzer = new Benutzer(username,password);
-		System.out.println("Username is:");
-		System.out.println("Loginname:" + username + " Password:" + password);
-		
+		System.out.println();
+		String encrypt = benutzer.encryptPassword(password);
+		benutzer.setPassword(encrypt);
+				
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(benutzer);
 		
-		//case 1 - Logge Nutzer ein und gehe zurück zur Startseite
+		//case 1 - Logge Nutzer ein, erstelle eine Session und gehe zurück zur Startseite
 		//case 2 - gib Fehlermeldung aus und bleibe bei Login
 		
 		if(sqlBenutzer != null) {
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("benutzer", benutzer);
+			session.setAttribute("username", benutzer);
+			session.setAttribute("Adresse", benutzer.getStreet() 
+				+ benutzer.getHousenmb() 
+				+ benutzer.getPostalcode() 
+				+ benutzer.getCity());
+			//session.setAttribute("Warenkorb", getWarenkorb);
+			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.setAttribute("error", "Kombination aus Email "
-					+ "und pw stimmen nicht überein!");
+					+ "und pw stimmen nicht überein!!");
+			
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 		
