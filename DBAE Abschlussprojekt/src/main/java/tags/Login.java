@@ -11,6 +11,11 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import data.Benutzer;
 
+/**Wird für Anpassungen der index.jsp benötigt / verwendet
+ * 
+ * @author dennishasselbusch
+ *
+ */
 public class Login extends SimpleTagSupport {
 
 	private String username;
@@ -27,8 +32,7 @@ public class Login extends SimpleTagSupport {
 		try {
 			benutzer = (Benutzer)session.getAttribute("username");
 			username = benutzer.getUsername();
-			
-			
+
 		} catch (NullPointerException npe) {
 			System.err.println("NullPointerException " + npe.toString());
 

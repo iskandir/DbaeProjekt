@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;  
 import javax.servlet.http.HttpSession;
 
+/**Das Servlet schließt die Session und loggt den Benutzer aus.
+ * 
+ * @author dennishasselbusch
+ *
+ */
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {  
     /**
@@ -28,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").include(request, response);  
             HttpSession session = request.getSession();  
             session.invalidate();  
-            
+            System.out.println("User wurde ausgeloggt!");
             out.close();  
     }  
 

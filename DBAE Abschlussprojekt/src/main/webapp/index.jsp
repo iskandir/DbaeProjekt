@@ -3,10 +3,7 @@
 <!DOCTYPE>
 <html>
     <head>
-        <!--Auflistung der Autoren-->
-        <meta name="authorOne" content="Dennis Hasselbusch">
-        <meta name="authorTwo" content="Marten Kracke">
-        <meta name="authorThree" content="Clemens Beck">
+        <meta name="author" content="Dennis Hasselbusch">
 
         <!--Beschreibung der Seite-->
         <meta name="description" content="DBAE Abschlussprojekt">

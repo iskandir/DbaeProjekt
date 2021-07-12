@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
+/** Benutzer Klasse zum speichern der Zugangsdaten.
  * @author dennishasselbusch
  *
  */
@@ -24,7 +24,7 @@ public class Benutzer {
 	
 	
 	/** Konstruktor zum anlegen eines neuen Benutzers
-	 * 
+	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
 	 * @param street
@@ -47,8 +47,8 @@ public class Benutzer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	/** Konstruktor für Login
-	 * 
+	/** Konstruktor für Login eines Benutzers
+	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
 	 */
@@ -128,7 +128,11 @@ public class Benutzer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+	/** Funktion hasht das Passwort in SHA512 Format
+	 * @author dennishasselbusch
+	 * @param password
+	 * @return
+	 */
 	public String encryptPassword(String password) 
 	{
 		try {

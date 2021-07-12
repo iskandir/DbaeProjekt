@@ -7,7 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
         <!--Css Stylesheet -->
         <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-
+		<meta name="author" content="Dennis Hasselbusch">
     </head>
     <body>
     

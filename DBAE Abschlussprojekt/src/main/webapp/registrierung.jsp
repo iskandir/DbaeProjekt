@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Registrierung</title>
+	<meta name="author" content="Dennis Hasselbusch">
  	<link rel="stylesheet" type="text/css" href="css/registration.css">
 </head>
 <body>

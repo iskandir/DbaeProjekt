@@ -12,14 +12,19 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**
- * Servlet implementation class LoginServlet
+/**LoginServlet welches gebraucht wird um das Login der Nutzer abzuarbeiten
+ * 
+ * @author dennishasselbusch
+ *
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
        
+	/**Methode mit der man alle Attribute des Benutzers auslesen kann
+	 * @author dennishasselbusch
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
@@ -33,7 +38,11 @@ public class LoginServlet extends HttpServlet {
 		
 		
 	}
-
+	/** Wird benötigt um den
+	 * Benutzer einzuloggen, dass Passwort zu hashen und mit der Datenbank
+	 * abzugleichen. 
+	 * @author dennishasselbusch
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String username = request.getParameter("username");

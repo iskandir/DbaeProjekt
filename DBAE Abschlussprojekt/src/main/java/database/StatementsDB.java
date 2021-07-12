@@ -10,14 +10,22 @@ import java.util.List;
 import java.util.ArrayList;
 
 import data.*;
-
+/** Ansammlung von verschiedenen Statemens für die Zugriffe auf die Datenbank
+ * 
+ * @author dennishasselbusch, clemensbeck, martenkracke
+ *
+ */
 public class StatementsDB {
 
 	private static Connection con = null;
-	//HochzÃ¤hlen der id Variable (keine SerialID, sondern bewusst 
-	//einen Int genommen) 
+	//hochzählen der Benutzerid zum zählen der Nutzer / Identifikation der Nutzer
 	private static int benutzerid = 0;
 	
+	/**Funktion wird benötigt um die Anzahl der Nutzer zu zählen und eine
+	 * zuverlässige Zuordnung der BenutzerId zu gewährleisten
+	 * erstellt von dennishasselbusch
+	 * @return
+	 */
 	private static Integer countUser() {
 		ResultSet rs = null;
 	    Connection conn = null;
@@ -48,7 +56,11 @@ public class StatementsDB {
 		return numberOfRows;
 	  }
 		
-	
+	/**Funktion wird benötigt um Benutzer zur Datenbank hinzuzufügen 
+	 * erstellt von dennishasselbusch
+	 * @param benutzer
+	 * @return
+	 */
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
 		benutzerid = countUser() + 1;
@@ -75,9 +87,7 @@ public class StatementsDB {
 			pstmtUser.setString(9, benutzer.getLastName());
 			pstmtUser.setString(10, benutzer.getEmail());
 			
-			/*Merke:Bei einem insert ist executeUpdate() notwendig
-			AusfÃ¼hren der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
-			*/
+			//Merke:Bei einem insert ist executeUpdate() notwendig
 			int zeilen = pstmtUser.executeUpdate();
 			
 			if(zeilen > 0) 
@@ -91,9 +101,8 @@ public class StatementsDB {
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		//abschlieÃend soll verbindung geschlossen werden, 
-		//das wird in einem Try/Catch Block gelÃ¶st um mÃ¶gliche Fehler abzufangen.
-				finally {
+		//Abschließend muss DB wieder geschlossen werden	
+			finally {
 					try {
 						con.close();
 					} catch (SQLException e) {
@@ -101,11 +110,14 @@ public class StatementsDB {
 					+ e.toString());
 					}
 				}
-
 		//und return der variable erfolg als erfolgsmeldung
 		return erfolg;
 	}
-	
+	/**Funktion die das Login des Benutzers durchführt in dem Nutzername und passwort abgefragt werden
+	 * erstellt von dennishasselbusch
+	 * @param benutzer
+	 * @return
+	 */
 	public static Benutzer benutzerLogin(Benutzer benutzer) {
 		Benutzer sqlBenutzer = new Benutzer(null, null);
 		
@@ -118,9 +130,7 @@ public class StatementsDB {
 			pstmtUserLogin.setString(1, benutzer.getUsername());
 			pstmtUserLogin.setString(2, benutzer.getPassword());
 			ResultSet rs = pstmtUserLogin.executeQuery();
-			
 
-			
 			if(rs.next()) {
 				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3));
 				System.out.println("User ist mit den Logindaten"

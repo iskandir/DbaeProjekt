@@ -14,7 +14,9 @@ import data.Produkt;
 import database.StatementsDB;
 
 /**
- * Servlet implementation class SearchServlet
+ * 
+ * @author xxxxxxxx
+ *
  */
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {

@@ -11,22 +11,19 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**
- * Servlet implementation class RegistrierungsServlet
+/**Servlet wird genutzt um dem Nutzer die Möglichkeit zu geben sich zu registrieren
+ * 
+ * @author dennishasselbusch
+ *
  */
 @WebServlet("/RegistrierungsServlet")
 public class RegistrierungsServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	/**Fragt die benötigten Parameter aus dem registrierung.jsp ab und speichert diese in der Datenbank
+	 * Besonderheit: Das Passwort wird gehasht gespeichert
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost");
@@ -46,8 +43,6 @@ public class RegistrierungsServlet extends HttpServlet {
 		
 		String encrypt = benutzer.encryptPassword(password);
 		benutzer.setPassword(encrypt);
-		System.out.println("Loginname:" + username + 
-				" Password:" + benutzer.getPassword());
 		
 		
 
@@ -66,15 +61,14 @@ public class RegistrierungsServlet extends HttpServlet {
 		//Prüfe ob Passwörter-Spalte leer sind
 		if(benutzer.getPassword().isEmpty())
 		{
-			System.out.println("Pw is empty!");			
+			System.out.println("Passwort ist leer!");			
 		} 
 		else
-		/** Prüfe länge der Email >= 8 , denn alle Mails < 5 sind nicht in korrektem Format.
+		/** Prüfe länge der Email >= 8
 		 * 
 		 */
 			if(benutzer.getEmail().length() >= 8)
-			{
-				System.out.println("Email ist lang genug !");
+			{	
 				/** Prüfe ob Passwörter gleich sind
 				 * 
 				 */

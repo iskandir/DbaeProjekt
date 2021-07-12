@@ -11,6 +11,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import data.Benutzer;
 
+/** Taglibs wird benötigt um den Header (also das Menü) dem Login-Status entsprechend
+ * anzupassen.
+ * 
+ * @author dennishasselbusch
+ *
+ */
 public class Head extends SimpleTagSupport {
 
 private String username;
@@ -22,7 +28,8 @@ private String username;
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		HttpSession session = request.getSession();
 		
-		Benutzer benutzer = null;			
+		Benutzer benutzer = null;		
+		
 		try {
 			benutzer = (Benutzer)session.getAttribute("username");
 			username = benutzer.getUsername();
@@ -60,6 +67,7 @@ private String username;
 					+ "</div> ");
 		
 		} else {
+			//user is not logged in
 			out.print("<div class=\"btn-group\" role=\"group\">"
 					+ "<div class=\"navbar-nav ml-auto\">"
 					+ "<div class=\"dropdown\">"
