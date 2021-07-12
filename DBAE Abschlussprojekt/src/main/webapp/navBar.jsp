@@ -22,7 +22,7 @@
 						<input type="text" name="searchbar" class="form-control" placeholder="Shop durchsuchen...">
 						<div class="input-group-append">
 						<form class="search" method="GET" action="SearchServlet">
-							<input type="submit" value="searchbar" id="searchBar" class="font-awesome btn btn-black" onChange="searching()">
+							<input type="submit" value="Suchen" id="searchBar" class="font-awesome btn btn-black" onChange="searching()">
 							</form>
 						</div>
 					</div>
