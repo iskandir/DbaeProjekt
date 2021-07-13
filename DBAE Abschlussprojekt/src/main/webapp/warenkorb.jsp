@@ -56,19 +56,19 @@
 							<div class="row">
 								<div class="col-50">
 									<div class="row">
-										<div class="col-25">
-											<label for="hausnummer">Hausnummer</label> <input type="number" id="hausnummer" name="hausnummer" value="">
-										</div>
 										<div class="col-75">
-											<label for="strasse">Strasse</label> <input type="text" id="strasse" name="strasse" value="">
+											<label for="strasse">Strasse</label> <input type="text" id="strasse" name="strasse" value="${benutzer.getStreet()}" required>
 										</div>	
+										<div class="col-25">
+											<label for="hausnummer">Hausnummer</label> <input type="text" id="hausnummer" name="hausnummer" value="${benutzer.getHousenmb()}" required>
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-25">
-											<label for="postleitzahl">Postleitzahl</label> <input type="text"id="postleitzahl" name="postleitzahl" value="">
+											<label for="postleitzahl">Postleitzahl</label> <input type="text"id="postleitzahl" name="postleitzahl" value="${benutzer.getPostalcode()}" required>
 										</div>
 										<div class="col-75">
-											<label for="stadt">Stadt</label> <input type="text" id="stadt" name="stadt" value="">
+											<label for="stadt">Stadt</label> <input type="text" id="stadt" name="stadt" value="${benutzer.getCity()}" required>
 										</div>
 									</div>
 								</div>
