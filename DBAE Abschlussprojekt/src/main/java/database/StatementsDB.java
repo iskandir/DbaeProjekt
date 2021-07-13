@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 import data.*;
 /** Ansammlung von verschiedenen Statemens für die Zugriffe auf die Datenbank
@@ -132,9 +135,10 @@ public class StatementsDB {
 			ResultSet rs = pstmtUserLogin.executeQuery();
 
 			if(rs.next()) {
-				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3));
+				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
 				System.out.println("User ist mit den Logindaten"
 						+ " in der Datenbank vorhanden");
+				System.out.println(sqlBenutzer.getFirstName() + sqlBenutzer.getLastName() + sqlBenutzer.getUsername());
 				return sqlBenutzer;
 			}
 		} catch (SQLException e) {
@@ -305,30 +309,73 @@ public class StatementsDB {
 		con.close();
 	}
 	
-	public static void bestellungHinzufuegen(Bestellung bestellung) throws SQLException {
+	public static void bestellungHinzufuegen(Bestellung bestellung) {
+		try {
+			con = DatabaseConnection.getConnection();
+			
+			Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
+			
+			PreparedStatement stBestellung = con.prepareStatement("INSERT INTO bestellungen (bestellzeitpunkt, gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			Instant instant = bestellung.getBestellzeitpunkt();
+			Timestamp timestamp = instant != null ? new Timestamp(instant.toEpochMilli()) : null;
+			
+			stBestellung.setTimestamp(1, timestamp);
+			stBestellung.setDouble(2, bestellung.getGesamtbetrag());
+			stBestellung.setArray(3, tempArray);
+			stBestellung.setString(4, bestellung.getVorname());
+			stBestellung.setString(5, bestellung.getNachname());
+			stBestellung.setString(6, bestellung.getStrasse());
+			stBestellung.setString(7, bestellung.getHausnummer());
+			stBestellung.setString(8, bestellung.getPostleitzahl());
+			stBestellung.setString(9, bestellung.getStadt());
+			
+			stBestellung.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
 		
-		Connection con = DatabaseConnection.getConnection();
-		con.setAutoCommit(false);
-		
-		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
-		
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
-		
-		stTicket.setDouble(1, bestellung.getGesamtbetrag());
-		stTicket.setArray(2, tempArray);
-		stTicket.setString(3, bestellung.getVorname());
-		stTicket.setString(4, bestellung.getNachname());
-		stTicket.setString(5, bestellung.getStrasse());
-		stTicket.setString(6, bestellung.getHausnummer());
-		stTicket.setString(7, bestellung.getPostleitzahl());
-		stTicket.setString(8, bestellung.getStadt());
-		
-		stTicket.executeUpdate();
-		
-		con.commit();
-		con.setAutoCommit(true);
-		con.close();
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+		}
 	}
 	
-	
+	public static Bestellung[] getBestellungen() {
+		
+		List<Bestellung> bestellungenList = new ArrayList<Bestellung>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM bestellungen");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				
+				Timestamp timestamp = rs.getTimestamp(2);
+				Instant instant = timestamp != null ? Instant.ofEpochMilli(timestamp.getTime()) : null;
+				
+				Array tempArray = (Array) rs.getArray(4);
+				String[] produktnummern = (String[]) tempArray.getArray();
+				
+				Bestellung newBestellung = new Bestellung(rs.getInt(1), instant, rs.getDouble(3), produktnummern, rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+				bestellungenList.add(newBestellung);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+		
+		System.out.println(bestellungenList.size());
+		return bestellungenList.toArray( new Bestellung[bestellungenList.size()]);
+	}
 }

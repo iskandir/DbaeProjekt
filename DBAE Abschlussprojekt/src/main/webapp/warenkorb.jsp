@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +23,32 @@
 			
 						
 		<div class="container">
+		
+			<table class="table table-sm table-striped">
+				<thead>
+					<tr>
+						<th scope="col" >Titel</th>
+						<th scope="col" >Beschreibung</th>
+						<th scope="col" >Preis</th>
+						<th scope="col" >Bild</th>
+						<th scope="col" >ProduktNr</th>
+						<th scope="col" >Typ</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="produkt" items="${produkte}">
+						<tr>
+							<td><c:out value="${produkt.titel}" /></td>
+							<td><c:out value="${produkt.beschreibung}" /></td>
+							<td><c:out value="${produkt.preis} EUR" /></td>
+							<td><a href="${produkt.bild}" target="_blank"€>Bild</a></td>
+							<td><c:out value="${produkt.produktnummer}" /></td>
+							<td><c:out value="${produkt.type}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		
 			<div class="row">
 				<div class="col-75">
 					<div class="checkout_container">

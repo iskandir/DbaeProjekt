@@ -36,7 +36,6 @@ public class Benutzer {
 	 */
 	public Benutzer(String username, String password, String street, String housenmb, String postalcode, String city,
 			String firstName, String lastName, String email) {
-		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -56,6 +55,21 @@ public class Benutzer {
 		super();
 		this.username = username;
 		this.password = password;
+	}
+	
+	/** 
+	 * @author clemensbeck
+	 * 
+	 */
+	public Benutzer(String username, String street, String housenmb, String postalcode, String city, String firstName, String lastName, String email) {
+		this.username = username;
+		this.street = street;
+		this.housenmb = housenmb;
+		this.postalcode = postalcode;
+		this.city = city;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 	}
 
 	public String getUsername() {

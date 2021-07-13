@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Admin Center Benutzer</title>
+		<title>Administration - Benutzer</title>
 	</head>
 	<body>
 	

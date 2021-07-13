@@ -30,7 +30,7 @@ public class Login extends SimpleTagSupport {
 		Benutzer benutzer = null;			
 
 		try {
-			benutzer = (Benutzer)session.getAttribute("username");
+			benutzer = (Benutzer)session.getAttribute("benutzer");
 			username = benutzer.getUsername();
 
 		} catch (NullPointerException npe) {

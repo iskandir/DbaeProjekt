@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.time.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,23 +42,25 @@ public class BestellungServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//TO DO 
-		//Double wird nicht richtig in DB eingetragen....? 
-		//wo bekomme ich die Daten her? Produktdaten -> Session? Userdaten???(Dennis)
 		
 		HttpSession session = request.getSession();
-		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
 		
+		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer"); 
+		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
 		
+		Double gesamtbetrag = 0.0;
+		Instant instant = Instant.now();
 		
-		
-		try {
-			String[] produktnummern = {"1", "2"}; 
-			//StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
-			StatementsDB.bestellungHinzufuegen(new Bestellung(0, 1.5, produktnummern, benutzer.getFirstName(), benutzer.getLastName(), "", "", "", ""));
-		} catch (SQLException e) {
-			
+		String[] produktnummern = new String[produkte.size()];
+		for(int i=0; i<produktnummern.length; i++) {
+			Produkt tempProdukt = produkte.get(i);
+			produktnummern[i] = tempProdukt.getProduktnummer();
+
+			gesamtbetrag = gesamtbetrag + tempProdukt.getPreis();
 		}
+		
+		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }

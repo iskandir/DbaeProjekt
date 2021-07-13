@@ -16,6 +16,9 @@ public class Produkt {
 	private String type;
 	private String art;
 	
+	//TODO Beliebtheit der Produkte
+	//Beliebteste Produkte ganz oben auf Index.jsp und in Tabelle in adminProdukte.jsp zeigen
+	
 	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type) {
 		this.titel = titel;
 		this.beschreibung = beschreibung;
