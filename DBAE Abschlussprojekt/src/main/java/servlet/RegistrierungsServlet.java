@@ -11,22 +11,19 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**
- * Servlet implementation class RegistrierungsServlet
+/**Servlet wird genutzt um dem Nutzer die Möglichkeit zu geben sich zu registrieren
+ * 
+ * @author dennishasselbusch
+ *
  */
 @WebServlet("/RegistrierungsServlet")
 public class RegistrierungsServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	/**Fragt die benötigten Parameter aus dem registrierung.jsp ab und speichert diese in der Datenbank
+	 * Besonderheit: Das Passwort wird gehasht gespeichert
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost");
@@ -41,27 +38,37 @@ public class RegistrierungsServlet extends HttpServlet {
 		String postalcode = request.getParameter("postalcode");
 		String city = request.getParameter("city");
 
-		benutzer = new Benutzer(username, email, password, street, housenmb,
-				postalcode, city, firstname, lastname);
+		benutzer = new Benutzer(username, password, street, housenmb, postalcode,
+				city, firstname, lastname, email);
+		
+		String encrypt = benutzer.encryptPassword(password);
+		benutzer.setPassword(encrypt);
+		
+		
 
-		System.out.println("Username: " + username + " \nFirstname: " + firstname 
-				+ "\nLastname:" + lastname + "\nEmail:" + email + "\nPw:" + password
-				+ "\nPwwdh:" + passwordWdh + "\nStreet:" + street + "\nHousenmb:" +
-				housenmb + "\nPostalcode:" + postalcode + "\nCity:" + city);
+		System.out.println("Username: " + benutzer.getUsername() 
+				+" \nFirstname: " + benutzer.getFirstName() 
+				+ "\nLastname:" + benutzer.getLastName() 
+				+ "\nEmail:" + benutzer.getEmail() 
+				+ "\nPw:" + benutzer.getPassword()
+				+ "\nPwwdh:" + passwordWdh 
+				+ "\nStreet:" + benutzer.getStreet() 
+				+ "\nHousenmb:" + benutzer.getHousenmb() 
+				+ "\nPostalcode:" + benutzer.getPostalcode() 
+				+ "\nCity:" + benutzer.getCity());
 		
 		
 		//Prüfe ob Passwörter-Spalte leer sind
 		if(benutzer.getPassword().isEmpty())
 		{
-			System.out.println("Pw is empty!");			
+			System.out.println("Passwort ist leer!");			
 		} 
 		else
-		/** Prüfe länge der Email >= 5 , denn alle Mails < 5 sind nicht in korrektem Format.
+		/** Prüfe länge der Email >= 8
 		 * 
 		 */
-			if(benutzer.getEmail().length() >= 5)
-			{
-				System.out.println("Email ist lang genug !");
+			if(benutzer.getEmail().length() >= 8)
+			{	
 				/** Prüfe ob Passwörter gleich sind
 				 * 
 				 */
@@ -78,20 +85,20 @@ public class RegistrierungsServlet extends HttpServlet {
 					} 
 					else
 					{
-						request.setAttribute("error", "Benutzer konnte nicht registriert werden");
+						request.setAttribute("error", "Benutzer konnte nicht registriert werden!");
 						request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 					}
 				}
 				else
 				{
-					request.setAttribute("error", "Passwörter nicht identisch");
+					request.setAttribute("error", "Passwörter nicht identisch!");
 					request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 				}
 			}
 			else
 			{
-				request.setAttribute("error", "Email Adresse ist nicht mind. 5 Zeichen lang.");
-				request.getRequestDispatcher("registrierung.jsp").forward(request, response);;
+				request.setAttribute("error", "Email Adresse ist nicht mind. 8 Zeichen lang!");
+				request.getRequestDispatcher("registrierung.jsp").forward(request, response);
 			}
 		
 		

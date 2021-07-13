@@ -3,7 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.time.*;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,19 +16,15 @@ import data.*;
 import database.StatementsDB;
 
 /**
- * Servlet implementation class BestellungServlet
+ * Servlet implementation class WarenkorbServlet
  */
-@WebServlet("/BestellungServlet")
-public class BestellungServlet extends HttpServlet {
+@WebServlet("/WarenkorbServlet")
+public class WarenkorbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BestellungServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,22 +41,28 @@ public class BestellungServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer"); 
+		String produktnummer = request.getParameter("produktnummer");
+		System.out.println("Produkt in Warenkorb:" + produktnummer);
+		
 		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
 		
-		Double gesamtbetrag = 0.0;
-		Instant instant = Instant.now();
-		
-		String[] produktnummern = new String[produkte.size()];
-		for(int i=0; i<produktnummern.length; i++) {
-			Produkt tempProdukt = produkte.get(i);
-			produktnummern[i] = tempProdukt.getProduktnummer();
-
-			gesamtbetrag = gesamtbetrag + tempProdukt.getPreis();
+		if(produkte == null) {
+			produkte = new ArrayList<Produkt>();
 		}
 		
-		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if(produktnummer != null) {
+			try {
+				Produkt produkt = StatementsDB.getProdukt(produktnummer);
+				produkte.add(produkt);
+			} catch (SQLException e) {
+				
+			}
+		}
+		
+		session.setAttribute("produkte", produkte);
+		
+		request.getRequestDispatcher("warenkorb.jsp").forward(request, response);
 	}
+
 }

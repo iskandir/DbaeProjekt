@@ -12,16 +12,16 @@ import data.*;
 import database.StatementsDB;
 
 /**
- * Servlet implementation class AdminCenterServlet
+ * Servlet implementation class AdminServlet
  */
-@WebServlet("/AdminCenterServlet")
-public class AdminCenterServlet extends HttpServlet {
+@WebServlet("/AdminServlet")
+public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
     /**
      * Default constructor. 
      */
-    public AdminCenterServlet() {
+    public AdminServlet() {
         // TODO Auto-generated constructor stub
     }
     
@@ -53,18 +53,22 @@ public class AdminCenterServlet extends HttpServlet {
 			session.setAttribute("softwareListe", softwareListe);
 			session.setAttribute("peripherieListe", peripherieListe);
 			
-			request.getRequestDispatcher("adminCenterProductList.jsp").forward((request), response);
+			request.getRequestDispatcher("adminProdukte.jsp").forward((request), response);
 			break;
 			
-		case "Bestellungen": 
+		case "Bestellungen":
+			Bestellung[] bestellungenListe = StatementsDB.getBestellungen();
 			
+			session.setAttribute("bestellungenListe", bestellungenListe);
+			
+			request.getRequestDispatcher("adminBestellungen.jsp").forward((request), response);
 			break;
 			
 		case "Kunden": 
 			Benutzer[] benutzerliste = StatementsDB.getBenutzer();
 			
 			session.setAttribute("benutzerliste", benutzerliste);
-			request.getRequestDispatcher("adminCenterUserList.jsp").forward((request), response);
+			request.getRequestDispatcher("adminBenutzer.jsp").forward((request), response);
 			break;
 		default:
 			request.getRequestDispatcher("index.jsp");

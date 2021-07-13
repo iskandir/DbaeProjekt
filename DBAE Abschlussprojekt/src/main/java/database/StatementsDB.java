@@ -6,22 +6,69 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 import data.*;
-
+/** Ansammlung von verschiedenen Statemens für die Zugriffe auf die Datenbank
+ * 
+ * @author dennishasselbusch, clemensbeck, martenkracke
+ *
+ */
 public class StatementsDB {
 
 	private static Connection con = null;
-	//HochzÃ¤hlen der id Variable (keine SerialID, sondern bewusst 
-	//einen Int genommen) 
+	//hochzählen der Benutzerid zum zählen der Nutzer / Identifikation der Nutzer
 	private static int benutzerid = 0;
 	
+	/**Funktion wird benötigt um die Anzahl der Nutzer zu zählen und eine
+	 * zuverlässige Zuordnung der BenutzerId zu gewährleisten
+	 * erstellt von dennishasselbusch
+	 * @return
+	 */
+	private static Integer countUser() {
+		ResultSet rs = null;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int numberOfRows = 0;
+	    try {
+	      conn = DatabaseConnection.getConnection();
+	      String query = "select count(*) from userdata";
+	      pstmt = conn.prepareStatement(query);
+	      rs = pstmt.executeQuery();
+	      if (rs.next()) {
+	        numberOfRows = rs.getInt(1);
+	        System.out.println("numberOfRows= " + numberOfRows);
+	      } else {
+	        System.out.println("Error: Konnte die Anzahl der User nicht auslesen");
+	      }
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	      try {
+	        rs.close();
+	        pstmt.close();
+	        conn.close();
+	      } catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+	    }
+		return numberOfRows;
+	  }
+		
+	/**Funktion wird benötigt um Benutzer zur Datenbank hinzuzufügen 
+	 * erstellt von dennishasselbusch
+	 * @param benutzer
+	 * @return
+	 */
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
-		benutzerid++;
+		benutzerid = countUser() + 1;
+		System.out.println("BenutzerId ist " + benutzerid);
+		
 		System.out.println("Benutzerhinzufuegen startet");
 		/**
 		 * FÃ¼ge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
@@ -31,7 +78,7 @@ public class StatementsDB {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUser = con.prepareStatement("INSERT INTO userdata "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-			//Befehle zum einfÃ¼gen der einzelnen Werte in die entsprechende Datenbank
+			//Befehle zum einfügen der einzelnen Werte in die entsprechende Datenbank
 			pstmtUser.setInt(1, benutzerid);
 			pstmtUser.setString(2, benutzer.getUsername());
 			pstmtUser.setString(3, benutzer.getPassword());
@@ -43,54 +90,56 @@ public class StatementsDB {
 			pstmtUser.setString(9, benutzer.getLastName());
 			pstmtUser.setString(10, benutzer.getEmail());
 			
-			/*Merke:Bei einem insert ist executeUpdate() notwendig
-			AusfÃ¼hren der beiden oben definierten SQL Befehle zum schreiben in die Datenbank  
-			*/
+			//Merke:Bei einem insert ist executeUpdate() notwendig
 			int zeilen = pstmtUser.executeUpdate();
 			
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufÃ¼gen der Werte!");
+				System.out.println("Erfolg beim hinzufü¼gen der Werte!");
 				
 			}
 		} catch(SQLException e) {
-			System.err.println("Fehler beim HinzufÃ¼gen der Benutzer mittels"
+			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		//abschlieÃend soll verbindung geschlossen werden, 
-		//das wird in einem Try/Catch Block gelÃ¶st um mÃ¶gliche Fehler abzufangen.
-				finally {
+		//Abschließend muss DB wieder geschlossen werden	
+			finally {
 					try {
 						con.close();
 					} catch (SQLException e) {
-						System.err.println("Fehler beim schlieÃen der Datenbank" 
+						System.err.println("Fehler beim schließen der Datenbank" 
 					+ e.toString());
 					}
 				}
-
 		//und return der variable erfolg als erfolgsmeldung
 		return erfolg;
 	}
-	
+	/**Funktion die das Login des Benutzers durchführt in dem Nutzername und passwort abgefragt werden
+	 * erstellt von dennishasselbusch
+	 * @param benutzer
+	 * @return
+	 */
 	public static Benutzer benutzerLogin(Benutzer benutzer) {
 		Benutzer sqlBenutzer = new Benutzer(null, null);
 		
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUserLogin = con.prepareStatement("SELECT *"
-					+ " FROM userdata WHERE benutzer.email LIKE ? and "
+					+ " FROM userdata WHERE username LIKE ? and "
 					+ "password LIKE ?");
-			pstmtUserLogin.setString(1, benutzer.getEmail());
+
+			pstmtUserLogin.setString(1, benutzer.getUsername());
 			pstmtUserLogin.setString(2, benutzer.getPassword());
 			ResultSet rs = pstmtUserLogin.executeQuery();
-			
+
 			if(rs.next()) {
-				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(3),
-						rs.getString(4),rs.getString(5),rs.getString(6),
-						rs.getString(7),rs.getString(8),rs.getString(9)
-						,rs.getString(10));
+				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+				System.out.println("User ist mit den Logindaten"
+						+ " in der Datenbank vorhanden");
+				System.out.println(sqlBenutzer.getFirstName() + sqlBenutzer.getLastName() + sqlBenutzer.getUsername());
+				return sqlBenutzer;
 			}
 		} catch (SQLException e) {
 			System.err.println("SQL Fehler - User nicht gefunden!");
@@ -99,13 +148,13 @@ public class StatementsDB {
 				con.close();
 			} catch(SQLException e) {
 				System.err.println("SQL Fehler - Verbindung konnte nicht "
-						+ "geschlossen werden;");
+						+ "geschlossen werden");
 			}
 		}
-		return sqlBenutzer;
+		return null;
 	}
 	
-public static Benutzer[] getBenutzer() {
+	public static Benutzer[] getBenutzer() {
 		
 		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
 		
@@ -278,26 +327,75 @@ public static Benutzer[] getBenutzer() {
 		con.close();
 	}
 	
-	public static void bestellungHinzufuegen(Bestellung bestellung) throws SQLException {
+	public static void bestellungHinzufuegen(Bestellung bestellung) {
+		try {
+			con = DatabaseConnection.getConnection();
+			
+			Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
+			
+			PreparedStatement stBestellung = con.prepareStatement("INSERT INTO bestellungen (bestellzeitpunkt, gesamtbetrag, produktnummern, vorname, nachname, strasse, hausnummer, postleitzahl, stadt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			Instant instant = bestellung.getBestellzeitpunkt();
+			Timestamp timestamp = instant != null ? new Timestamp(instant.toEpochMilli()) : null;
+			
+			stBestellung.setTimestamp(1, timestamp);
+			stBestellung.setDouble(2, bestellung.getGesamtbetrag());
+			stBestellung.setArray(3, tempArray);
+			stBestellung.setString(4, bestellung.getVorname());
+			stBestellung.setString(5, bestellung.getNachname());
+			stBestellung.setString(6, bestellung.getStrasse());
+			stBestellung.setString(7, bestellung.getHausnummer());
+			stBestellung.setString(8, bestellung.getPostleitzahl());
+			stBestellung.setString(9, bestellung.getStadt());
+			
+			stBestellung.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
 		
-		Connection con = DatabaseConnection.getConnection();
-		con.setAutoCommit(false);
-		
-		Array tempArray = con.createArrayOf("VARCHAR", bestellung.getProduktnummern());
-		
-		PreparedStatement stTicket = con.prepareStatement("INSERT INTO bestellungen (gesamtbetrag, mail, produktnummern) VALUES (?, ?, ?);");
-		
-		stTicket.setDouble(1, bestellung.getGesamtbetrag());
-		stTicket.setString(2, bestellung.getMail());
-		stTicket.setArray(3, tempArray);
-		stTicket.executeUpdate();
-		
-		con.commit();
-		
-		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
-		
-		con.setAutoCommit(true);
-		con.close();
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+		}
 	}
 	
+	public static Bestellung[] getBestellungen() {
+		
+		List<Bestellung> bestellungenList = new ArrayList<Bestellung>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM bestellungen");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				
+				Timestamp timestamp = rs.getTimestamp(2);
+				Instant instant = timestamp != null ? Instant.ofEpochMilli(timestamp.getTime()) : null;
+				
+				Array tempArray = (Array) rs.getArray(4);
+				String[] produktnummern = (String[]) tempArray.getArray();
+				
+				Bestellung newBestellung = new Bestellung(rs.getInt(1), instant, rs.getDouble(3), produktnummern, rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+				bestellungenList.add(newBestellung);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+    
+		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
+    
+		System.out.println(bestellungenList.size());
+		return bestellungenList.toArray( new Bestellung[bestellungenList.size()]);
+	}
 }

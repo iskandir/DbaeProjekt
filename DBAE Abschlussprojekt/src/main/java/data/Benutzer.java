@@ -3,7 +3,11 @@
  */
 package data;
 
-/**
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+/** Benutzer Klasse zum speichern der Zugangsdaten.
  * @author dennishasselbusch
  *
  */
@@ -18,8 +22,9 @@ public class Benutzer {
 	private String lastName;
 	private String email;
 	
+	
 	/** Konstruktor zum anlegen eines neuen Benutzers
-	 * 
+	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
 	 * @param street
@@ -31,7 +36,6 @@ public class Benutzer {
 	 */
 	public Benutzer(String username, String password, String street, String housenmb, String postalcode, String city,
 			String firstName, String lastName, String email) {
-		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -42,15 +46,30 @@ public class Benutzer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	/** Konstruktor für Login
-	 * 
+	/** Konstruktor für Login eines Benutzers
+	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
 	 */
-	public Benutzer(String email, String password) {
+	public Benutzer(String username, String password) {
 		super();
-		this.email = email;
+		this.username = username;
 		this.password = password;
+	}
+	
+	/** 
+	 * @author clemensbeck
+	 * 
+	 */
+	public Benutzer(String username, String street, String housenmb, String postalcode, String city, String firstName, String lastName, String email) {
+		this.username = username;
+		this.street = street;
+		this.housenmb = housenmb;
+		this.postalcode = postalcode;
+		this.city = city;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -68,10 +87,8 @@ public class Benutzer {
 	}
 
 	public String getPassword() {
-		//Verschlüsseln des Passworts
-		int myHash = password.hashCode();
-		String hashedPassword = String.valueOf(myHash);
-		return hashedPassword;
+		encryptPassword(password);
+		return password;
 	}
 
 	public void setPassword(String password) {
@@ -125,7 +142,33 @@ public class Benutzer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+	/** Funktion hasht das Passwort in SHA512 Format
+	 * @author dennishasselbusch
+	 * @param password
+	 * @return
+	 */
+	public String encryptPassword(String password) 
+	{
+		try {
+			//getInstance() wird mit SHA-512 Methode aufgerufen
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			
+			//nun wird das passwort(eingegangen als String) in ein byte Array
+			//konvertiert um weitere Berechnungen damit vornehmen zu können
+			byte[] messageDigest = md.digest(password.getBytes());
+			
+			BigInteger no = new BigInteger(1,messageDigest);
+			String hashText = no.toString(16);
+			
+			while(hashText.length() < 32) {
+				hashText = "0" + hashText;
+			}
+			return hashText;
+		}
+		catch(NoSuchAlgorithmException e) {
+			throw new RuntimeException (e);
+		}
+	}
 	
 
 }

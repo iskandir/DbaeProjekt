@@ -10,9 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.StatementsDB;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import data.*;
+import database.StatementsDB;
+
+
 
 @WebServlet("/Produkte")
 public class ProduktServlet extends HttpServlet {

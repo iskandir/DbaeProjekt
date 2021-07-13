@@ -1,10 +1,9 @@
+<%@ taglib uri="WEB-INF/taglibs/logintags.tld" prefix="log" %>
+
 <!DOCTYPE>
 <html>
     <head>
-        <!--Auflistung der Autoren-->
-        <meta name="authorOne" content="Dennis Hasselbusch">
-        <meta name="authorTwo" content="Marten Kracke">
-        <meta name="authorThree" content="Clemens Beck">
+        <meta name="author" content="Dennis Hasselbusch">
 
         <!--Beschreibung der Seite-->
         <meta name="description" content="DBAE Abschlussprojekt">
@@ -24,39 +23,14 @@
         <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     </head>
     <body>
-   		
 		<jsp:include page="navBar.jsp"/>
-		
-      
-      <!--Head Bar-->
-      <nav class="container d-none d-lg-flex" id="subnav">
-        <ul class="nav">  
-          <li class="navbar-nav ml-auto">
-          <div class="dropdown">
-           <button class="dropmenu"><img src="pictures/warenkorb.jpeg" alt="Käufer" width="20" height="20">
-           <span class="float-right" style="color: red">Produkte</span>
-		      <i class="fa fa-caret-down"></i>
-		    </button>
-            <div class="dropdown-content">
-		      <a href="#">Hardware</a>
-		      <a href="#">Peripherie</a>
-		      <a href="#">Software</a>
-		    </div>
-          </div>
-            <li class="nav-item">
-              <a class="nav-link" href="/Outlet" title="Outlet">Deals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/promotions.xhtml" title="Aktionen">Aktionen</a>
-            </li>
-        </ul>
-      </nav>
-
-    <div class="container">
-        <br>
-        <h1>Willkommen!</h1>
-        <button>CLICK ME!</button>
-    </div>
-      </body>
+    
+	    <div class="container">
+	    	<log:Login/>
+	    	
+	    	<!-- TODO 
+	    	Produkte auflisten, vlt mit TagLibs?  -->
+	    </div>
+   	</body>
  
 </html>
