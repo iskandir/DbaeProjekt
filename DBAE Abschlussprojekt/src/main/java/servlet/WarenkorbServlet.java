@@ -62,7 +62,15 @@ public class WarenkorbServlet extends HttpServlet {
 		
 		session.setAttribute("produkte", produkte);
 		
-		request.getRequestDispatcher("warenkorb.jsp").forward(request, response);
+		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
+		
+		if(benutzer == null) {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("warenkorb.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 }

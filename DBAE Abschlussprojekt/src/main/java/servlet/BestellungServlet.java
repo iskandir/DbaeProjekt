@@ -45,6 +45,11 @@ public class BestellungServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		String strasse = request.getParameter("strasse");
+		String hausnummer = request.getParameter("hausnummer");
+		String postleitzahl = request.getParameter("postleitzahl");
+		String stadt = request.getParameter("stadt");
+		
 		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer"); 
 		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
 		
@@ -59,7 +64,7 @@ public class BestellungServlet extends HttpServlet {
 			gesamtbetrag = gesamtbetrag + tempProdukt.getPreis();
 		}
 		
-		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), benutzer.getStreet(), benutzer.getHousenmb(), benutzer.getPostalcode(), benutzer.getCity()));
+		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), strasse, hausnummer, postleitzahl, stadt));
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
