@@ -15,6 +15,7 @@ public class Produkt {
 	private String produktnummer;
 	private String type;
 	private String art;
+	private int kaufanzahl;
 	
 	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type) {
 		this.titel = titel;
@@ -33,6 +34,16 @@ public class Produkt {
 		this.produktnummer = produktnummer;
 		this.type = type;
 		this.art = art;
+	}
+	
+	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type, int kaufanzahl) {
+		this.titel = titel;
+		this.beschreibung = beschreibung;
+		this.preis = preis;
+		this.bild = bild;
+		this.produktnummer = produktnummer;
+		this.type = type;
+		this.kaufanzahl = kaufanzahl;
 	}
 	
 	public String getTitel() {
@@ -89,5 +100,13 @@ public class Produkt {
 
 	public void setArt(String art) {
 		this.art = art;
+	}
+
+	public int getKaufanzahl() {
+		return kaufanzahl;
+	}
+
+	public void setKaufanzahl(int kaufanzahl) {
+		this.kaufanzahl = kaufanzahl;
 	}
 }

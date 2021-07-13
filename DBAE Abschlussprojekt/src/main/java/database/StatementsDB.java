@@ -243,6 +243,24 @@ public static Benutzer[] getBenutzer() {
 		}
 		return produkt;
 	}
+	
+	public static Produkt[] getTopProdukte() throws SQLException {
+		Produkt[] produkte = null;
+		Connection con = DatabaseConnection.getConnection();
+		PreparedStatement st = con.prepareStatement(
+				"SELECT * FROM (SELECT * FROM hardware UNION SELECT * FROM software UNION SELECT * from peripherie) allProducts ORDER BY kaufanzahl DESC LIMIT 10;"
+			);
+		ResultSet result = st.executeQuery();
+		con.close();
+		if (result.next()) {
+			produkte = new Produkt[10];
+			for (int i = 0; i < 10; i++) {
+				produkte[i] = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+				result.next();
+			}
+		}
+		return produkte;
+	}
 
 	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
@@ -275,6 +293,9 @@ public static Benutzer[] getBenutzer() {
 		stTicket.executeUpdate();
 		
 		con.commit();
+		
+		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
+		
 		con.setAutoCommit(true);
 		con.close();
 	}
