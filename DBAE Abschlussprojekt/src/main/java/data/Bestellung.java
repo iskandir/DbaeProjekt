@@ -1,12 +1,15 @@
 package data;
 
+import java.time.Instant;;
+
 /**
  * @author clemensbeck
  *
  */
 public class Bestellung {
 	
-	private Integer bestellnummer;
+	private int bestellnummer;
+	private Instant bestellzeitpunkt;
 	private Double gesamtbetrag;
 	private String[] produktnummern;
 	private String vorname;
@@ -17,8 +20,21 @@ public class Bestellung {
 	private String stadt;
 	
 	
-	public Bestellung (Integer bestellnummer, Double gesamtbetrag, String[] produktnummern, String vorname, String nachname, String strasse, String hausnummer, String postleitzahl, String stadt) {
-		this.bestellnummer = bestellnummer; 
+	public Bestellung (Instant bestellzeitpunkt, Double gesamtbetrag, String[] produktnummern, String vorname, String nachname, String strasse, String hausnummer, String postleitzahl, String stadt) {
+		this.bestellzeitpunkt = bestellzeitpunkt;
+		this.gesamtbetrag = gesamtbetrag; 
+		this.produktnummern = produktnummern;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.strasse = strasse;
+		this.hausnummer = hausnummer;
+		this.postleitzahl = postleitzahl;
+		this.stadt = stadt;
+	}
+	
+	public Bestellung (int bestellnummer, Instant bestellzeitpunkt, Double gesamtbetrag, String[] produktnummern, String vorname, String nachname, String strasse, String hausnummer, String postleitzahl, String stadt) {
+		this.bestellnummer = bestellnummer;
+		this.bestellzeitpunkt = bestellzeitpunkt;
 		this.gesamtbetrag = gesamtbetrag; 
 		this.produktnummern = produktnummern;
 		this.vorname = vorname;
@@ -30,13 +46,23 @@ public class Bestellung {
 	}
 
 
-	public Integer getBestellnummer() {
+	public int getBestellnummer() {
 		return bestellnummer;
 	}
 
 
-	public void setBestellnummer(Integer bestellnummer) {
+	public void setBestellnummer(int bestellnummer) {
 		this.bestellnummer = bestellnummer;
+	}
+
+
+	public Instant getBestellzeitpunkt() {
+		return bestellzeitpunkt;
+	}
+
+
+	public void setBestellzeitpunkt(Instant bestellzeitpunkt) {
+		this.bestellzeitpunkt = bestellzeitpunkt;
 	}
 
 
@@ -118,6 +144,8 @@ public class Bestellung {
 	public void setStadt(String stadt) {
 		this.stadt = stadt;
 	}
+	
+	
 	
 	
 }

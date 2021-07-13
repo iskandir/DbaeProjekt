@@ -19,7 +19,7 @@ import database.StatementsDB;
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	Benutzer benutzer = null;
+	Benutzer tempBenutzer = null;
 	private static final long serialVersionUID = 1L;
        
 	/**Methode mit der man alle Attribute des Benutzers auslesen kann
@@ -29,11 +29,11 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("Username", benutzer.getUsername());
-		session.setAttribute("Adresse", benutzer.getStreet() 
-				+ benutzer.getHousenmb() 
-				+ benutzer.getPostalcode() 
-				+ benutzer.getCity());
+		session.setAttribute("Username", tempBenutzer.getUsername());
+		session.setAttribute("Adresse", tempBenutzer.getStreet() 
+				+ tempBenutzer.getHousenmb() 
+				+ tempBenutzer.getPostalcode() 
+				+ tempBenutzer.getCity());
 		
 		
 		
@@ -50,12 +50,12 @@ public class LoginServlet extends HttpServlet {
 
 		System.out.println("DOPOST: \n username " + username + "\n password "
 				+ password);
-		benutzer = new Benutzer(username,password);
+		tempBenutzer = new Benutzer(username,password);
 		System.out.println();
-		String encrypt = benutzer.encryptPassword(password);
-		benutzer.setPassword(encrypt);
+		String encrypt = tempBenutzer.encryptPassword(password);
+		tempBenutzer.setPassword(encrypt);
 				
-		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(benutzer);
+		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(tempBenutzer);
 		
 		//case 1 - Logge Nutzer ein, erstelle eine Session und gehe zurück zur Startseite
 		//case 2 - gib Fehlermeldung aus und bleibe bei Login
@@ -63,12 +63,7 @@ public class LoginServlet extends HttpServlet {
 		if(sqlBenutzer != null) {
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("username", benutzer);
-			session.setAttribute("Adresse", benutzer.getStreet() 
-				+ benutzer.getHousenmb() 
-				+ benutzer.getPostalcode() 
-				+ benutzer.getCity());
-			//session.setAttribute("Warenkorb", getWarenkorb);
+			session.setAttribute("benutzer", sqlBenutzer);
 			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
