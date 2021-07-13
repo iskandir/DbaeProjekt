@@ -25,7 +25,7 @@
 			</div>
 			<div class="container">
 				<form class ="products" method="POST" action=WarenkorbServlet>
-				 	<input type="text" id="produktnummer" name="produktnummer" value="${produkt.getProduktnummer()}">
+				 	<input type="hidden" id="produktnummer" name="produktnummer" value="${produkt.getProduktnummer()}">
 					<input type="submit" value="Zu Warenkorb hinzufuegen" name=""/>
 				</form>
 			</div>
