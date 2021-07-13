@@ -17,7 +17,7 @@
 		            <tr>
                 		<th scope="col">Bestellnummer</th>
                 		<th scope="col">Bestellzeitpunkt</th>
-                		<th scope="col">Produktnummern</th>
+                		<th scope="col">Produkte</th>
                 		<th scope="col">Gesamtbetrag</th>
                 		<th scope="col">Vorname</th>
                 		<th scope="col">Nachname</th>
