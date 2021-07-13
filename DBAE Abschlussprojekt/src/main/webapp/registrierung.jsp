@@ -42,16 +42,16 @@
 			<h2>Adresse</h2>
 			
 			<label for="street"><b>Straße</b></label>
-			<input type="text" placeholder="Straße" name="street" id="street" required>
+			<input type="text" placeholder="Straße" name="street" id="street">
 			
 			<label for="housenmb"><b>Hausnummer</b></label>
-			<input type="number" placeholder="Hausnummer" name="housenmb" id="housenmb" required> <br>
+			<input type="text" placeholder="Hausnummer" name="housenmb" id="housenmb"> <br>
 			
 			<br> <label for="postalcode"><b>Postleitzahl</b></label>
-			<input type="text" placeholder="Postleitzahl" name="postalcode" id="postalcode" required>
+			<input type="text" placeholder="Postleitzahl" name="postalcode" id="postalcode">
 			
 			<label for="city"><b>Stadt</b></label>
-			<input type="text" placeholder="Stadt" name="city" id="city" required>
+			<input type="text" placeholder="Stadt" name="city" id="city">
 			<p>
 				Mit Erstellung des Accounts stimmst du allen <a href="#">Datenschutzbestimmungen</a>
 				zu.
