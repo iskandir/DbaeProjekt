@@ -7,8 +7,11 @@
 		<title>Ihre Support-Anfrage</title>
 	</head>
 	<body>
-		<jsp:include page="navBar.jsp"/>
+		<jsp:include page="navigation.jsp"/>
+		
 		
 		<p>${output}</p>
+		
+		
 	</body>
 </html>

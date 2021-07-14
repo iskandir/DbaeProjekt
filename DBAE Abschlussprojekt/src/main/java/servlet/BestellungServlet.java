@@ -42,7 +42,6 @@ public class BestellungServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		
 		String strasse = request.getParameter("strasse");
@@ -52,6 +51,7 @@ public class BestellungServlet extends HttpServlet {
 		
 		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer"); 
 		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
+		session.removeAttribute("produkte");
 		
 		Double gesamtbetrag = 0.0;
 		Instant instant = Instant.now();

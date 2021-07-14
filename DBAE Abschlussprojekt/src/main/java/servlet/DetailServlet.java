@@ -19,11 +19,11 @@ import database.StatementsDB;
 
 
 
-@WebServlet("/Produkte")
-public class ProduktServlet extends HttpServlet {
+@WebServlet("/DetailServlet")
+public class DetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ProduktServlet() {
+    public DetailServlet() {
         super();
     }
 
@@ -44,7 +44,7 @@ public class ProduktServlet extends HttpServlet {
 			session.removeAttribute("produkt");
 			session.setAttribute("msg", "Es gab ein Problem beim Laden des Produktes: " + e.getMessage());
 		}
-		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/detail.jsp").forward(request, response);
 		
 	}
 

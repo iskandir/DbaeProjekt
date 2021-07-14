@@ -9,78 +9,57 @@
 	
 		<!--Viewport auf Basis des verw. Geräts mit Skalierung 10-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta charset="UTF-8">
-		
-		 <!--Bootstrap via CDN hinzugefügt-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">      
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous" type="text/javascript"></script>
-        <!--Css Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="css/warenkorb.css">
+		<link rel="stylesheet" type="text/css" href="css/warenkorb.css">
 	</head>
 	<body>
-		<jsp:include page="navBar.jsp" />
+		<jsp:include page="navigation.jsp" />
+		<form class="bestellung" method="POST" action="BestellungServlet">
+			<div class="grid-container">
 			
-			
-						
-		<div class="container">
-		
-			<table class="table table-sm table-striped">
-				<thead>
-					<tr>
-						<th scope="col" >Titel</th>
-						<th scope="col" >Beschreibung</th>
-						<th scope="col" >Preis</th>
-						<th scope="col" >Bild</th>
-						<th scope="col" >ProduktNr</th>
-						<th scope="col" >Typ</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="produkt" items="${produkte}">
+			<table class="produkte table table-sm table-striped ">
+					<thead>
 						<tr>
-							<td><c:out value="${produkt.titel}" /></td>
-							<td><c:out value="${produkt.beschreibung}" /></td>
-							<td><c:out value="${produkt.preis} EUR" /></td>
-							<td><a href="${produkt.bild}" target="_blank"€>Bild</a></td>
-							<td><c:out value="${produkt.produktnummer}" /></td>
-							<td><c:out value="${produkt.type}" /></td>
+							<th scope="col" >Titel</th>
+							<th scope="col" >Beschreibung</th>
+							<th scope="col" >Preis</th>
+							<th scope="col" >Bild</th>
+							<th scope="col" >ProduktNr</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="produkt" items="${produkte}">
+							<tr>
+								<td><c:out value="${produkt.titel}" /></td>
+								<td><c:out value="${produkt.beschreibung}" /></td>
+								<td><c:out value="${produkt.preis} EUR" /></td>
+								<td><a href="${produkt.bild}" target="_blank"€>Bild</a></td>
+								<td><c:out value="${produkt.produktnummer}" /></td>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Gesamtbetrag:</td>
+							<td>${gesamtbetrag}</td>
+						</tr>
+					</tbody>
+				</table>
 		
-			<div class="row">
-				<div class="col-75">
-					<div class="checkout_container">
-						<form class="bestellung" method="POST" action="BestellungServlet">
-							<div class="row">
-								<div class="col-50">
-									<div class="row">
-										<div class="col-75">
-											<label for="strasse">Strasse</label> <input type="text" id="strasse" name="strasse" value="${benutzer.getStreet()}" required>
-										</div>	
-										<div class="col-25">
-											<label for="hausnummer">Hausnummer</label> <input type="text" id="hausnummer" name="hausnummer" value="${benutzer.getHousenmb()}" required>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-25">
-											<label for="postleitzahl">Postleitzahl</label> <input type="text"id="postleitzahl" name="postleitzahl" value="${benutzer.getPostalcode()}" required>
-										</div>
-										<div class="col-75">
-											<label for="stadt">Stadt</label> <input type="text" id="stadt" name="stadt" value="${benutzer.getCity()}" required>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<input type="checkbox" name="agb_gelesen" required>
-							<label for="agb_gelesen">Ich habe die AGB gelesen und bin mit deren Geltung einverstanden.</label>
-							<input type="submit" value="Zahlungspflichtig bestellen" class="checkout_btn">
-						</form>
-					</div>
-				</div>
+				<p class="adresse">Adresse</p>
+			
+				<input class="strasse form-control" type="text" id="strasse" name="strasse" value="${benutzer.getStreet()}" placeholder="Strasse" required>
+				<input class="hausnummer form-control" type="text" id="hausnummer" name="hausnummer" value="${benutzer.getHousenmb()}" placeholder="Hausnummer" required>
+				<input class="postleitzahl form-control" type="text"id="postleitzahl" name="postleitzahl" value="${benutzer.getPostalcode()}" placeholder="Postleitzahl" required>
+				<input class="stadt form-control" type="text" id="stadt" name="stadt" value="${benutzer.getCity()}" placeholder="Stadt" required>
+				
+				<p class="agb">Mit der Bestellung stimme ich den AGB und Datenschutzbestimmungen zu.</p>
+				
+				<input class="bestellen btn btn-primary" type="submit" value="Zahlungspflichtig bestellen" class="checkout_btn">
+				<button class="abbrechen btn btn-outline-secondary" type="button" onclick="history.go(-1)">Abbrechen</button>
+		
 			</div>
-		</div>
+		</form>
+		
 	</body>
 </html>

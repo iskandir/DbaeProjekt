@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**LoginServlet welches gebraucht wird um das Login der Nutzer abzuarbeiten
+/**AnmeldenServlet welches gebraucht wird um das Login der Nutzer abzuarbeiten
  * 
  * @author dennishasselbusch
  *
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/AnmeldenServlet")
+public class AnmeldenServlet extends HttpServlet {
 	Benutzer tempBenutzer = null;
 	private static final long serialVersionUID = 1L;
        
@@ -45,14 +45,14 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String benutzername = request.getParameter("benutzername");
+		String passwort = request.getParameter("passwort");
 
-		System.out.println("DOPOST: \n username " + username + "\n password "
-				+ password);
-		tempBenutzer = new Benutzer(username,password);
+		System.out.println("DOPOST: \n benutzername " + benutzername + "\n password "
+				+ passwort);
+		tempBenutzer = new Benutzer(benutzername,passwort);
 		System.out.println();
-		String encrypt = tempBenutzer.encryptPassword(password);
+		String encrypt = tempBenutzer.encryptPassword(passwort);
 		tempBenutzer.setPassword(encrypt);
 				
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(tempBenutzer);
@@ -67,10 +67,9 @@ public class LoginServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
-			request.setAttribute("error", "Kombination aus Email "
-					+ "und pw stimmen nicht überein!!");
+			request.setAttribute("error", "Benutzername oder Passwort falsch!");
 			
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("anmelden.jsp").forward(request, response);
 		}
 		
 	}

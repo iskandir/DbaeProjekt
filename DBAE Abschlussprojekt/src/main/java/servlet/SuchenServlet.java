@@ -18,8 +18,8 @@ import database.StatementsDB;
  * @author xxxxxxxx
  *
  */
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/SuchenServlet")
+public class SuchenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class SearchServlet extends HttpServlet {
 		Produkt produkt;
 		
 		try {
-			produkt = StatementsDB.getProdukt(request.getParameter("searchBar"));
+			produkt = StatementsDB.getProdukt(request.getParameter("search"));
 			System.out.println("Produkt: " + produkt);
 		} catch(SQLException e) {
 			System.out.println("Produkt not found");
