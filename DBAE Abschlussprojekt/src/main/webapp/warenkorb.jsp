@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="ISO-8859-1">
 	<title>Warenkorb</title>
 	
-		<!--Viewport auf Basis des verw. Geräts mit Skalierung 10-->
+		<!--Viewport auf Basis des verw. GerÃ¤ts mit Skalierung 10-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/warenkorb.css">
 	</head>
@@ -15,33 +16,34 @@
 		<jsp:include page="navigation.jsp" />
 		<form class="bestellung" method="POST" action="BestellungServlet">
 			<div class="grid-container">
-			
-			<table class="produkte table table-sm table-striped ">
+				<table class="produkte table table-hover table-striped ">
 					<thead>
 						<tr>
-							<th scope="col" >Titel</th>
-							<th scope="col" >Beschreibung</th>
-							<th scope="col" >Preis</th>
-							<th scope="col" >Bild</th>
-							<th scope="col" >ProduktNr</th>
+							<th scope="col">Artikel</th>
+							<th scope="col"></th>
+							<th scope="col">Summe</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="produkt" items="${produkte}">
 							<tr>
+								<td><img src="${produkt.bild}" width="100em"></td>
 								<td><c:out value="${produkt.titel}" /></td>
-								<td><c:out value="${produkt.beschreibung}" /></td>
 								<td><c:out value="${produkt.preis} EUR" /></td>
-								<td><a href="${produkt.bild}" target="_blank"€>Bild</a></td>
-								<td><c:out value="${produkt.produktnummer}" /></td>
 							</tr>
 						</c:forEach>
 						<tr>
 							<td></td>
-							<td></td>
-							<td></td>
-							<td>Gesamtbetrag:</td>
-							<td>${gesamtbetrag}</td>
+							<td>
+							Gesamtbetrag:<br>
+							Gesamtbetrag ohne MwSt.:<br>
+							zzgl. 19% MwSt.:
+							</td>
+							<td>
+							<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${gesamtbetrag * 1.19}"/><br>
+							<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${gesamtbetrag}"/><br>
+							<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${gesamtbetrag / 100 * 19}"/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -60,6 +62,7 @@
 		
 			</div>
 		</form>
+	
 		
 	</body>
 </html>
