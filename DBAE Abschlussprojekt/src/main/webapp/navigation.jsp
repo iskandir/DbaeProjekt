@@ -54,9 +54,9 @@
 						</ul>
 					</li>
 				</ul>
-				<form class="d-flex" method="GET" action=SearchServlet>
-					<input class="form-control me-4" id="search" type="search" placeholder="Suche">
-					<button class="btn btn btn-secondary" type="submit">Suchen</button>
+				<form class="d-flex" method="GET" action=SuchenServlet>
+					<input class="form-control me-2" name="suche" id="suche" type="search" placeholder="Suche" required>
+					<button class="btn btn btn-outline-success" type="submit">Suchen</button>
 				</form>
 			</div>
 		</div>

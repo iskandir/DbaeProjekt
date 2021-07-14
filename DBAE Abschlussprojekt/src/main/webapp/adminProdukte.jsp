@@ -17,15 +17,15 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th scope="col" style="width: 15%">Titel</th>
-						<th scope="col" style="width: 20%">Beschreibung</th>
-						<th scope="col" style="width: 10%">Preis</th>
-						<th scope="col" style="width: 5%">Bild</th>
-						<th scope="col" style="width: 10%">ProduktNr</th>
-						<th scope="col" style="width: 10%">Typ</th>
-						<th scope="col" style="width: 10%">Table</th>
-						<th scope="col" style="width: 10%">Detail</th>
-						<th scope="col" style="width: 10%">Kaufanzahl</th>
+						<th scope="col">Titel</th>
+						<th scope="col">Beschreibung</th>
+						<th scope="col">Preis</th>
+						<th scope="col">Bild</th>
+						<th scope="col">ProduktNr</th>
+						<th scope="col">Typ</th>
+						<th scope="col">Table</th>
+						<th scope="col">Detail</th>
+						<th scope="col">Kaufanzahl</th>
 					</tr>
 				</thead>
 				<tbody style="font-size: 12px;">
@@ -45,7 +45,7 @@
 							<td>
 								<form class="products" method="GET" action=DetailServlet>
 									<input type="hidden" id="custId" name="p" value="${produkt.produktnummer}"> 
-									<input class="btn btn-outline-info" type="submit" value="Detail" name="" />
+									<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 								</form>
 							</td>
 							<td><c:out value="${produkt.kaufanzahl}" /></td>
@@ -67,7 +67,7 @@
 							<td>
 								<form class="products" method="GET" action=DetailServlet>
 									<input type="hidden" id="custId" name="p" value="${produkt.produktnummer}"> 
-									<input class="btn btn-outline-info" type="submit" value="Detail" name="" />
+									<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 								</form>
 							</td>
 							<td><c:out value="${produkt.kaufanzahl}" /></td>
@@ -90,7 +90,7 @@
 								<form class="products" method="GET" action=DetailServlet>
 									<input type="hidden" id="custId" name="p"
 										value="${produkt.produktnummer}"> 
-										<input class="btn btn-outline-info" type="submit" value="Detail" name="" />
+										<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 								</form>
 							</td>
 							<td><c:out value="${produkt.kaufanzahl}" /></td>

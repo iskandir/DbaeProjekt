@@ -24,15 +24,13 @@ public class SuchenServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Produkt produkt;
+		Produkt[] produkte;
 		
-		try {
-			produkt = StatementsDB.getProdukt(request.getParameter("search"));
-			System.out.println("Produkt: " + produkt);
-		} catch(SQLException e) {
-			System.out.println("Produkt not found");
-		}
-	
+		produkte = StatementsDB.sucheProdukte(request.getParameter("suche"));
+		
+		session.setAttribute("suchergebnisse", produkte);
+		
+		request.getRequestDispatcher("suchergebnisse.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

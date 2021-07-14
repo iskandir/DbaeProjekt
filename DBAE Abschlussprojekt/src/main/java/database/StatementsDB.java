@@ -310,6 +310,39 @@ public class StatementsDB {
 		}
 		return produkte;
 	}
+	
+	public static Produkt[] sucheProdukte(String suche) {
+		
+		System.out.println(suche);
+		
+		List<Produkt> produktListe = new ArrayList<Produkt>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement(
+					"SELECT * FROM hardware WHERE titel ILIKE '%" + suche + "%' UNION "
+					+ "SELECT * FROM software WHERE titel ILIKE '%" + suche + "%' UNION "
+					+ "SELECT * FROM peripherie WHERE titel ILIKE '%" + suche + "%'"
+					+ ";");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				produktListe.add(newProdukt);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol: " + e.toString());
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+		}
+		
+		return produktListe.toArray( new Produkt[produktListe.size()]);
+	}
 
 	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
