@@ -384,8 +384,6 @@ public static Ticket[] getTickets() {
 			}
  		}
     
-		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
-    
 		System.out.println(ticketListe.size());
 		return ticketListe.toArray( new Ticket[ticketListe.size()]);
 	}
@@ -412,6 +410,13 @@ public static Ticket[] getTickets() {
 			stBestellung.setString(9, bestellung.getStadt());
 			
 			stBestellung.executeUpdate();
+			
+			for (String nummer : bestellung.getProduktnummern()) {
+				for (String table : new String[]{"hardware", "software", "peripherie"}) {
+					con.prepareStatement("UPDATE " + table + " SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = '" + nummer + "';").executeUpdate();
+				}
+			}
+			
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 		}
