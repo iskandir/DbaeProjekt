@@ -15,14 +15,14 @@ import database.*;
 
 /** Taglibs wird benötigt um den Header (also das Menü) dem Login-Status entsprechend
  * anzupassen.
- * 
+ *
  * @author dennishasselbusch
  *
  */
 public class Head extends SimpleTagSupport {
 
 private String username;
-	
+
 //
 //<div class="card produkte" style="width: 18rem;">
 //<div class="card-body">
@@ -40,17 +40,18 @@ private String username;
 		PageContext pageContext = (PageContext) getJspContext();
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		HttpSession session = request.getSession();
-		
-		
+
+
 		try {
-			
+
 			out.print("<h4>Beliebteste Produkte</h4>");
-			
+
 			Produkt[] beliebt = StatementsDB.getTopProdukte();
-			
+
 			out.print("<div class=\"beliebtliste\">");
 			for(Produkt produkt:beliebt) {
-				out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
+				out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
+						+ "<img src=" + produkt.getBild() + " class=\"card-img-top\">"
 						+ "<div class=\"card-body\">"
 						+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 						+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
@@ -61,12 +62,12 @@ private String username;
 		} catch(SQLException e) {
 			out.print("<p>"+ e.getMessage() + "</p>");
 		}
-		
-		
+
+
 		out.print("<h4>Hardware</h4>");
-		
+
 		Produkt[] produkte = StatementsDB.getHardware();
-		
+
 		out.print("<div class=\"hardwareliste\">");
 		for(Produkt produkt:produkte) {
 			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
@@ -77,12 +78,12 @@ private String username;
 					+ "</a>");
 		}
 		out.print("</div>");
-		
-		
+
+
 		out.print("<h4>Software</h4>");
-		
+
 		produkte = StatementsDB.getSoftware();
-		
+
 		out.print("<div class=\"softwareliste\">");
 		for(Produkt produkt:produkte) {
 			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
@@ -93,12 +94,12 @@ private String username;
 					+ "</a>");
 		}
 		out.print("</div>");
-		
-		
+
+
 		out.print("<h4>Peripherie</h4>");
-		
+
 		produkte = StatementsDB.getPeripherie();
-		
+
 		out.print("<div class=\"peripherieliste\">");
 		for(Produkt produkt:produkte) {
 			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
@@ -109,7 +110,7 @@ private String username;
 					+ "</a>");
 		}
 		out.print("</div>");
-		
-		
+
+
 	}
 }
