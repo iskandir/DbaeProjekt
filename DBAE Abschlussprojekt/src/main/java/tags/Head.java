@@ -52,6 +52,7 @@ private String username;
 			for(Produkt produkt:beliebt) {
 				out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 						+ "<div class=\"card produkt\">"
+						+ "<img src=" + produkt.getBild() + " class=\"card-img-top\">"
 						+ "<div class=\"card-body\">"
 						+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 						+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
