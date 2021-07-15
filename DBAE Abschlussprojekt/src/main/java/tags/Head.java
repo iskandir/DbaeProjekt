@@ -21,27 +21,12 @@ import database.*;
  */
 public class Head extends SimpleTagSupport {
 
-private String username;
-
-//
-//<div class="card produkte" style="width: 18rem;">
-//<div class="card-body">
-//  <h5 class="card-title">Produkte</h5>
-//  <p class="card-text">Hier siehst du alle Produkte in den Datenbanken Hardware, Software, Peripherie.</p>
-//  <form class="" method="POST" action=AdminServlet>
-//		<input class="btn btn-primary" type="submit" value="Produkte" name="details" />
-//	</form>
-//</div>
-//</div>
-
 	public void doTag() throws JspException, IOException{
 		//Grundgerüst um die Daten aus der Request zu holen
 		JspWriter out = getJspContext().getOut();
 		PageContext pageContext = (PageContext) getJspContext();
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-		HttpSession session = request.getSession();
-
-
+		
 		try {
 
 			out.print("<h4>Beliebteste Produkte</h4>");
@@ -50,7 +35,7 @@ private String username;
 
 			out.print("<div class=\"beliebtliste\">");
 			for(Produkt produkt:beliebt) {
-				out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
+				out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 						+ "<img src=" + produkt.getBild() + " class=\"card-img-top\">"
 						+ "<div class=\"card-body\">"
 						+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
