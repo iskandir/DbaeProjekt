@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
+/*author clemensbeck */
+
 body {
-	 padding:80px;
+	 margin:80px;
 }
 
 .navbar {

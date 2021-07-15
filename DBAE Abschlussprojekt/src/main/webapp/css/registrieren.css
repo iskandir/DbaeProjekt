@@ -1,5 +1,6 @@
-/*author dennishasselbusch */
+@charset "UTF-8";
 
+/*author dennishasselbusch */
 
 .benutzerdaten { grid-area: a1; }
 .benutzername { grid-area: a2; }
