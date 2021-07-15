@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+/*author clemensbeck */
+
+.hardwareliste, .softwareliste, .peripherieliste, .beliebtliste { 
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.produkt {
+	flex-grow: 4;
+	text-decoration: none;
+	color: black;
+}

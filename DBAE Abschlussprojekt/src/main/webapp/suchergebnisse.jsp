@@ -31,7 +31,7 @@
 						<td><c:out value="${produkt.titel}" /></td>
 						<td><c:out value="${produkt.beschreibung}" /></td>
 						<td>
-							<form class="products" method="GET" action=DetailServlet>
+							<form class="products" method="GET" action=Produkte>
 								<input type="hidden" id="custId" name="p" value="${produkt.produktnummer}"> 
 								<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 							</form>
