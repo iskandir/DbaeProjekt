@@ -44,18 +44,16 @@ private String username;
 		
 		try {
 			
-			out.print("<p>Beliebteste Produkte</p>");
+			out.print("<h4>Beliebteste Produkte</h4>");
 			
 			Produkt[] beliebt = StatementsDB.getTopProdukte();
 			
 			out.print("<div class=\"beliebtliste\">");
 			for(Produkt produkt:beliebt) {
-				out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
-						+ "<div class=\"card produkt\">"
+				out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 						+ "<div class=\"card-body\">"
 						+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 						+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
-						+ "</div>"
 						+ "</div>"
 						+ "</a>");
 			}
@@ -65,54 +63,48 @@ private String username;
 		}
 		
 		
-		out.print("<p>Hardware</p>");
+		out.print("<h4>Hardware</h4>");
 		
 		Produkt[] produkte = StatementsDB.getHardware();
 		
 		out.print("<div class=\"hardwareliste\">");
 		for(Produkt produkt:produkte) {
-			out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
-					+ "<div class=\"card produkt\">"
+			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 					+ "<div class=\"card-body\">"
 					+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 					+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
-					+ "</div>"
 					+ "</div>"
 					+ "</a>");
 		}
 		out.print("</div>");
 		
 		
-		out.print("<p>Sorftware</p>");
+		out.print("<h4>Software</h4>");
 		
 		produkte = StatementsDB.getSoftware();
 		
 		out.print("<div class=\"softwareliste\">");
 		for(Produkt produkt:produkte) {
-			out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
-					+ "<div class=\"card produkt\">"
+			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 					+ "<div class=\"card-body\">"
 					+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 					+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
-					+ "</div>"
 					+ "</div>"
 					+ "</a>");
 		}
 		out.print("</div>");
 		
 		
-		out.print("<p>Peripherie</p>");
+		out.print("<h4>Peripherie</h4>");
 		
 		produkte = StatementsDB.getPeripherie();
 		
 		out.print("<div class=\"peripherieliste\">");
 		for(Produkt produkt:produkte) {
-			out.print("<a class=\"produkt\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
-					+ "<div class=\"card produkt\">"
+			out.print("<a class=\"produkt card\" href=\"./Produkte?p=" + produkt.getProduktnummer() + "\">"
 					+ "<div class=\"card-body\">"
 					+ "<h5 class=\"card-title\">" + produkt.getTitel() + "</h5>"
 					+ "<p class=\"card-text\">" + produkt.getBeschreibung() + "</p>"
-					+ "</div>"
 					+ "</div>"
 					+ "</a>");
 		}
