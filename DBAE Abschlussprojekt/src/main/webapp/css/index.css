@@ -3,10 +3,10 @@
 /*author clemensbeck */
 
 .hardwareliste, .softwareliste, .peripherieliste, .beliebtliste { 
-	display: flex;
-	justify-content: space-justify;
+	display: inline-flex;
 	align-items: stretch;
 	gap: 0.3em;
+	margin-bottom: 3em;
 }
 
 .produkt {
