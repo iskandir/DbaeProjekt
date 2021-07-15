@@ -1,6 +1,6 @@
-@charset "ISO-8859-1";
-/*author martenkracke */
+@charset "UTF-8";
 
+/*author martenkracke */
 
 .supportticket { grid-area: a1; }
 .vorname { grid-area: a2; }

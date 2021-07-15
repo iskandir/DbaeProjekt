@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/*author clemensbeck */
+
 .titel { grid-area: a1; }
 .bild { grid-area: a2; }
 .beschreibung { grid-area: a3; }

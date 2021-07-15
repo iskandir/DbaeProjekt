@@ -19,7 +19,7 @@ import database.StatementsDB;
 
 
 
-@WebServlet("/DetailServlet")
+@WebServlet("/Produkte")
 public class DetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

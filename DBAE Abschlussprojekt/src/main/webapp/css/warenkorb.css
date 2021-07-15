@@ -1,6 +1,6 @@
-@charset "ISO-8859-1";
-/*author clemensbeck */
+@charset "UTF-8";
 
+/*author clemensbeck */
 
 .produkte { grid-area: a1; }
 .adresse { grid-area: a2; }

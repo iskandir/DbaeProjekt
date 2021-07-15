@@ -1,11 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Administration - Produkte</title>
+	<title>Administration - Produkte</title>
+
+	<meta name="author" content="Clemens Beck">
+	
+	<meta charset="UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -43,7 +48,7 @@
 							<td><c:out value="${produkt.type}" /></td>
 							<td><c:out value="${produkt.art}" /></td>
 							<td>
-								<form class="products" method="GET" action=DetailServlet>
+								<form class="products" method="GET" action=Produkte>
 									<input type="hidden" id="custId" name="p" value="${produkt.produktnummer}"> 
 									<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 								</form>
@@ -65,7 +70,7 @@
 							<td><c:out value="${produkt.type}" /></td>
 							<td><c:out value="${produkt.art}" /></td>
 							<td>
-								<form class="products" method="GET" action=DetailServlet>
+								<form class="products" method="GET" action=Produkte>
 									<input type="hidden" id="custId" name="p" value="${produkt.produktnummer}"> 
 									<input class="btn btn-outline-info" type="submit" value="Details" name="" />
 								</form>
@@ -87,7 +92,7 @@
 							<td><c:out value="${produkt.type}" /></td>
 							<td><c:out value="${produkt.art}" /></td>
 							<td>
-								<form class="products" method="GET" action=DetailServlet>
+								<form class="products" method="GET" action=Produkte>
 									<input type="hidden" id="custId" name="p"
 										value="${produkt.produktnummer}"> 
 										<input class="btn btn-outline-info" type="submit" value="Details" name="" />

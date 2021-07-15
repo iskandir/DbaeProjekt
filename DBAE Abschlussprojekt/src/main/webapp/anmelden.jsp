@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
-<meta name="author" content="Dennis Hasselbusch">
-<link rel="stylesheet" type="text/css" href="css/anmelden.css">
+	<title>Anmelden</title>
+	
+	<meta name="author" content="Dennis Hasselbusch">
+	
+	<meta charset="UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" type="text/css" href="css/anmelden.css">
 </head>
 <body>
 	<jsp:include page="navigation.jsp" />
@@ -21,7 +26,6 @@
 
 			<button class="registrieren btn btn-outline-secondary" type="button" onclick="window.location.href='registrieren.jsp'">Registrieren</button>
 			<button class="abbrechen btn btn-outline-secondary" type="button" onclick="history.go(-1)">Abbrechen</button>
-
 		</div>
 	</form>
 </body>
