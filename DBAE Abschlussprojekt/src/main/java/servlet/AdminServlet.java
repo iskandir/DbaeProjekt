@@ -70,6 +70,12 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("benutzerliste", benutzerliste);
 			request.getRequestDispatcher("adminBenutzer.jsp").forward((request), response);
 			break;
+		case "Support":
+			Ticket[] ticketliste = StatementsDB.getTickets();
+			
+			session.setAttribute("ticketliste", ticketliste);
+			request.getRequestDispatcher("adminSupport.jsp").forward((request), response);
+			break;
 		default:
 			request.getRequestDispatcher("index.jsp");
 		}

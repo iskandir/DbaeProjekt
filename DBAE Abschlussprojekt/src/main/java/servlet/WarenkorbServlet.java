@@ -36,6 +36,9 @@ public class WarenkorbServlet extends HttpServlet {
 		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
 		
 		if(benutzer == null) {
+			
+			request.setAttribute("error", "Bitte melde dich erst an.");
+			
 			request.getRequestDispatcher("anmelden.jsp").forward(request, response);
 		} else {
 			

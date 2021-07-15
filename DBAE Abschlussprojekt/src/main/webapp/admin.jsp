@@ -40,12 +40,12 @@
 			</form>
 		  </div>
 		</div>
-		<div class="card warenkorb" style="width: 18rem;">
+		<div class="card support" style="width: 18rem;">
 		  <div class="card-body">
-		    <h5 class="card-title">Warenkorb</h5>
-		    <p class="card-text">Testfunktion.</p>
-		    <form class="" method="GET" action=WarenkorbServlet>
-				<input class="btn btn-primary" type="submit" value="Warenkorb" name="details" />
+		    <h5 class="card-title">Supporttickets</h5>
+		    <p class="card-text">Hier siehst du alle Supporttickets.</p>
+		    <form class="" method="POST" action=AdminServlet>
+				<input class="btn btn-primary" type="submit" value="Support" name="details" />
 			</form>
 		  </div>
 		</div>

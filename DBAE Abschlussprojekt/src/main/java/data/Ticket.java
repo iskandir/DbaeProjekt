@@ -50,4 +50,12 @@ public class Ticket {
 		this.mail = mail;
 		this.inhalt = inhalt;
 	}
+	public Ticket(int id, String vorname, String name, String betreff, String mail, String inhalt) {
+		this.id = id;
+		this.vorname = vorname;
+		this.name = name;
+		this.betreff = betreff;
+		this.mail = mail;
+		this.inhalt = inhalt;
+	}
 }
