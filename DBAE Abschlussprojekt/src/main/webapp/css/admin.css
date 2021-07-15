@@ -1,7 +1,7 @@
 .produkte { grid-area: a1; }
 .betellungen { grid-area: a2; }
 .kunden { grid-area: a3; }
-.warenkorb { grid-area: a4; }
+.support { grid-area: a4; }
 
 .grid-container {
 	grid-gap: 10px;

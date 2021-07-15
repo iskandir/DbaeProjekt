@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+.output { grid-area: a1; }
+.registrieren { grid-area: a2; }
+
+.grid-container {
+	grid-gap: 10px;
+	margin: auto;
+	width: 70%;
+	display: grid;
+	grid-template-areas:
+		'a1'
+		'a2';
+}

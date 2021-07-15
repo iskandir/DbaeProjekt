@@ -360,6 +360,36 @@ public class StatementsDB {
 		con.close();
 	}
 	
+public static Ticket[] getTickets() {
+		
+		List<Ticket> ticketListe = new ArrayList<Ticket>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement what = con.prepareStatement("SELECT * FROM supportdata");
+			ResultSet rs = what.executeQuery();
+			
+			while(rs.next()) {
+				Ticket ticket = new Ticket(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				ticketListe.add(ticket);
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL Fehler - WTF lol");
+		} finally {
+			try {
+				con.close();
+			} catch(SQLException e) {
+				System.err.println("SQL Fehler - Verbindung konnte nicht "
+						+ "geschlossen werden;");
+			}
+ 		}
+    
+		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
+    
+		System.out.println(ticketListe.size());
+		return ticketListe.toArray( new Ticket[ticketListe.size()]);
+	}
+	
 	public static void bestellungHinzufuegen(Bestellung bestellung) {
 		try {
 			con = DatabaseConnection.getConnection();
