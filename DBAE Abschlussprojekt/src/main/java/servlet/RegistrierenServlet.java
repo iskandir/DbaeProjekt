@@ -16,8 +16,8 @@ import database.StatementsDB;
  * @author dennishasselbusch
  *
  */
-@WebServlet("/RegistrierungsServlet")
-public class RegistrierungsServlet extends HttpServlet {
+@WebServlet("/RegistrierenServlet")
+public class RegistrierenServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
 
@@ -27,16 +27,16 @@ public class RegistrierungsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost");
-		String username = request.getParameter("username");
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
+		String username = request.getParameter("benutzername");
+		String firstname = request.getParameter("vorname");
+		String lastname = request.getParameter("nachname");
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String passwordWdh = request.getParameter("psw-repeat");
-		String street = request.getParameter("street");
-		String housenmb = request.getParameter("housenmb");
-		String postalcode = request.getParameter("postalcode");
-		String city = request.getParameter("city");
+		String password = request.getParameter("passwort");
+		String passwordWdh = request.getParameter("passwort-repeat");
+		String street = request.getParameter("strasse");
+		String housenmb = request.getParameter("hausnummer");
+		String postalcode = request.getParameter("postleitzahl");
+		String city = request.getParameter("stadt");
 
 		benutzer = new Benutzer(username, password, street, housenmb, postalcode,
 				city, firstname, lastname, email);
@@ -86,19 +86,19 @@ public class RegistrierungsServlet extends HttpServlet {
 					else
 					{
 						request.setAttribute("error", "Benutzer konnte nicht registriert werden!");
-						request.getRequestDispatcher("registrierung.jsp").forward(request, response);
+						request.getRequestDispatcher("registrieren.jsp").forward(request, response);
 					}
 				}
 				else
 				{
-					request.setAttribute("error", "Passwörter nicht identisch!");
-					request.getRequestDispatcher("registrierung.jsp").forward(request, response);
+					request.setAttribute("error", "Passwoerter nicht identisch!");
+					request.getRequestDispatcher("registrieren.jsp").forward(request, response);
 				}
 			}
 			else
 			{
-				request.setAttribute("error", "Email Adresse ist nicht mind. 8 Zeichen lang!");
-				request.getRequestDispatcher("registrierung.jsp").forward(request, response);
+				request.setAttribute("error", "Email ist nicht mind. 8 Zeichen lang!");
+				request.getRequestDispatcher("registrieren.jsp").forward(request, response);
 			}
 		
 		

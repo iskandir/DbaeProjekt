@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.abmelden { grid-area: a1; }
+.abbrechen { grid-area: a2; }
+
+.grid-container {
+	grid-gap: 10px;
+	margin: auto;
+	width: 70%;
+	display: grid;
+	grid-template-areas:
+		'a1 a2';
+}

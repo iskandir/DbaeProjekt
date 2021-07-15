@@ -31,42 +31,43 @@ public class WarenkorbServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		
-		String produktnummer = request.getParameter("produktnummer");
-		System.out.println("Produkt in Warenkorb:" + produktnummer);
-		
-		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
-		
-		if(produkte == null) {
-			produkte = new ArrayList<Produkt>();
-		}
-		
-		
-		if(produktnummer != null) {
-			try {
-				Produkt produkt = StatementsDB.getProdukt(produktnummer);
-				produkte.add(produkt);
-			} catch (SQLException e) {
-				
-			}
-		}
-		
-		session.setAttribute("produkte", produkte);
-		
 		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer");
 		
 		if(benutzer == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("anmelden.jsp").forward(request, response);
 		} else {
+			
+			
+			String produktnummer = request.getParameter("produktnummer");
+			System.out.println("Produkt in Warenkorb:" + produktnummer);
+			
+			List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
+			
+			if(produkte == null) {
+				produkte = new ArrayList<Produkt>();
+			}
+			
+			
+			if(produktnummer != null) {
+				try {
+					Produkt produkt = StatementsDB.getProdukt(produktnummer);
+					produkte.add(produkt);
+				} catch (SQLException e) {
+					
+				}
+			}
+			
+			Double gesamtbetrag = 0.0;
+			
+			for(int i=0; i<produkte.size(); i++) {
+				gesamtbetrag = gesamtbetrag + produkte.get(i).getPreis();
+			}
+			
+			session.setAttribute("produkte", produkte);
+			session.setAttribute("gesamtbetrag", gesamtbetrag);
+			
 			request.getRequestDispatcher("warenkorb.jsp").forward(request, response);
 		}
 		

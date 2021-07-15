@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.time.*;
+import java.lang.Math;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,6 @@ public class BestellungServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		
 		String strasse = request.getParameter("strasse");
@@ -52,6 +52,7 @@ public class BestellungServlet extends HttpServlet {
 		
 		Benutzer benutzer = (Benutzer) session.getAttribute("benutzer"); 
 		List<Produkt> produkte = (List<Produkt>) session.getAttribute("produkte");
+		session.removeAttribute("produkte");
 		
 		Double gesamtbetrag = 0.0;
 		Instant instant = Instant.now();
@@ -63,6 +64,9 @@ public class BestellungServlet extends HttpServlet {
 
 			gesamtbetrag = gesamtbetrag + tempProdukt.getPreis();
 		}
+		
+		gesamtbetrag = gesamtbetrag * 1.19;
+		
 		
 		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), strasse, hausnummer, postleitzahl, stadt));
 		

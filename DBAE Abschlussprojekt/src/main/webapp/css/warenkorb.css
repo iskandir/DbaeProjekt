@@ -1,72 +1,27 @@
 @charset "ISO-8859-1";
+/*author clemensbeck */
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -16px;
-}
 
-.col-25 {
-  flex: 25%;
-}
+.produkte { grid-area: a1; }
+.adresse { grid-area: a2; }
+.strasse { grid-area: a3; }
+.hausnummer { grid-area: a4; }
+.postleitzahl { grid-area: a5;}
+.stadt { grid-area: a6; }
+.agb { grid-area: a7; }
+.bestellen { grid-area: a8; }
+.abbrechen { grid-area: a9; }
 
-.col-50 {
-  flex: 50%;
-}
-
-.col-75 {
-  flex: 75%;
-}
-
-.col-25,
-.col-50,
-.col-75 {
-  padding: 0 16px;
-}
-
-.checkout_container {
-  background-color: #f2f2f2;
-  padding: 5px 20px 15px 20px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-}
-
-input[type=text], input[type=number] {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-.icon-container {
-  margin-bottom: 20px;
-  padding: 7px 0;
-  font-size: 24px;
-}
-
-.checkout_btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  width: 100%;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 17px;
-}
-
-.checkout_btn:hover {
-  background-color: #45a049;
-}
-
-span.price {
-  float: right;
-  color: grey;
+.grid-container {
+	grid-gap: 10px;
+	margin: auto;
+	width: 70%;
+	display: grid;
+	grid-template-areas:
+		'a1 a1'
+		'a2 a2'
+		'a3 a4'
+		'a5 a6'
+		'a7 a7'
+		'a8 a9';
 }

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+body {
+	 padding:80px;
+}
+
+.navbar {
+	background-color: #69d35d;
+}

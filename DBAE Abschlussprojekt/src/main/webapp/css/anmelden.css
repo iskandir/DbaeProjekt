@@ -1,0 +1,22 @@
+/*author dennishasselbusch */
+
+
+.benutzername { grid-area: a1; }
+.passwort { grid-area: a2; }
+.anmelden { grid-area: a3; }
+.fehlermeldung { grid-area: a4; color: red !important;}
+.registrieren { grid-area: a5; }
+.abbrechen { grid-area: a6; }
+
+.grid-container {
+	grid-gap: 10px;
+	margin: auto;
+	width: 70%;
+	display: grid;
+	grid-template-areas:
+		'a1 a1'
+		'a2 a2'
+		'a3 a3'
+		'a4 a4'
+		'a5 a6';
+}

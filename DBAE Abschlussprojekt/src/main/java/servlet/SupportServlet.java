@@ -31,21 +31,23 @@ public class SupportServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String name = request.getParameter("Nachname");
-		String vorname = request.getParameter("Name");
 		
+		String nachname = request.getParameter("nachname");
+		String vorname = request.getParameter("vorname");
+		String email = request.getParameter("email");
+		String betreff = request.getParameter("betreff");
+		String inhalt = request.getParameter("inhalt");
 		
 		String msg;
 		try {
-			StatementsDB.ticketHinzufuegen(new Ticket(vorname, name , request.getParameter("Betreff"), request.getParameter("Email"), request.getParameter("Inhalt")));
-			msg = "Ihr Ticket wird zeitnah von unserem Support mit hoher Priorität bearbeitet!!!:)";
+			StatementsDB.ticketHinzufuegen(new Ticket(vorname, nachname , betreff, email, inhalt));
+			msg = "Ihr Ticket wird zeitnah von unserem Support bearbeitet.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			msg = "Ihre Anfrage konnte leider nicht gespeichert werden: " + e.getMessage();
 		}
 		
 		session.setAttribute("output", msg);
-		
 		
 		request.getRequestDispatcher("erfolg.jsp").forward(request, response);
 	}

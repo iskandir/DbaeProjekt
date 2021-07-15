@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
  * @author dennishasselbusch
  *
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {  
+@WebServlet("/AbmeldenServlet")
+public class AbmeldenServlet extends HttpServlet {  
     /**
 	 * 
 	 */
@@ -24,17 +24,10 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-		protected void doGet(HttpServletRequest request, HttpServletResponse response)  
-                                throws ServletException, IOException {  
-			
-            response.setContentType("text/html");  
-            PrintWriter out=response.getWriter();  
-              
-            request.getRequestDispatcher("index.jsp").include(request, response);  
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
             HttpSession session = request.getSession();  
             session.invalidate();  
-            System.out.println("User wurde ausgeloggt!");
-            out.close();  
+            response.sendRedirect("index.jsp");
     }  
 
 
