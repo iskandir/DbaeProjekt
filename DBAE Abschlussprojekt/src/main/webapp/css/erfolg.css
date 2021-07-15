@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/*author martenkracke */
+
 .output { grid-area: a1; }
 .registrieren { grid-area: a2; }
 
