@@ -1,4 +1,4 @@
-<%@ taglib uri="WEB-INF/taglibs/headertags.tld" prefix="head" %>
+<%@ taglib uri="WEB-INF/taglibs/produktlisting.tld" prefix="produkte" %>
 
 <!DOCTYPE>
 <html>
@@ -16,6 +16,6 @@
 <body>
 	<jsp:include page="navigation.jsp" />
 	
-	<head:Header/>
+	<produkte:Produktlisting/>
 </body>
 </html>

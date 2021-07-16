@@ -13,13 +13,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import data.*;
 import database.*;
 
-/** Taglibs wird benötigt um den Header (also das Menü) dem Login-Status entsprechend
- * anzupassen.
+/** Dieser Tag gibt die Produkte auf index.jsp in folgender Reihenfolge aus: Beliebteste (10), Hardware, Software, Peripherie
  *
- * @author dennishasselbusch
+ * @author clemensbeck
  *
  */
-public class Head extends SimpleTagSupport {
+public class Produktlisting extends SimpleTagSupport {
 
 	public void doTag() throws JspException, IOException{
 		//Grundgerüst um die Daten aus der Request zu holen

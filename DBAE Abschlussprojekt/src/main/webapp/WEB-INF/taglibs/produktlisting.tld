@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--author dennishasselbusch -->
+<!--author clemensbeck -->
 <!DOCTYPE xml>
 
 <taglib>
 	<!-- Initialisierung/Definition -->
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>2.0</jsp-version>
-	<short-name>HeaderTag</short-name>
+	<short-name>ProduktTag</short-name>
 	
 	<tag>
-	<name>Header</name>
-	<tag-class>tags.Head</tag-class>
+	<name>Produktlisting</name>
+	<tag-class>tags.Produktlisting</tag-class>
 	<body-content>empty</body-content>
 	</tag>
 
