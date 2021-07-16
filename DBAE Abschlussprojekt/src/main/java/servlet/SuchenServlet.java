@@ -14,13 +14,17 @@ import database.StatementsDB;
 
 /**
  * 
- * @author xxxxxxxx
+ * @author clemensbeck
  *
  */
 @WebServlet("/SuchenServlet")
 public class SuchenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	/** Ruft die Suchfunktion in StatementsDB auf und leitet zu suchergebnisse.jsp weiter
+	 * @author clemensbeck
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Produkt[] produkte;

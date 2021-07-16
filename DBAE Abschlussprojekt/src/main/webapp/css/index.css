@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/*author clemensbeck */
+/*author martenkracke */
 
 .hardwareliste, .softwareliste, .peripherieliste, .beliebtliste { 
 	display: inline-flex;

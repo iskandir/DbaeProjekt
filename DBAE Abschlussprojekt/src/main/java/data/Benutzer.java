@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package data;
 
@@ -7,9 +7,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/** Benutzer Klasse zum speichern der Zugangsdaten.
- * @author dennishasselbusch
+/** Benutzerklasse zum Speichern der Zugangsdaten.
  *
+ * @author dennishasselbusch
  */
 public class Benutzer {
 	private String username;
@@ -21,9 +21,8 @@ public class Benutzer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	
-	
-	/** Konstruktor zum anlegen eines neuen Benutzers
+
+	/** Konstruktor zum Anlegen eines neuen Benutzers
 	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
@@ -46,7 +45,8 @@ public class Benutzer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	/** Konstruktor für Login eines Benutzers
+
+	/** Konstruktor fÃ¼r Login eines Benutzers
 	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
@@ -55,10 +55,17 @@ public class Benutzer {
 		this.username = username;
 		this.password = password;
 	}
-	
-	/** 
+
+	/** Konstruktor ohne Passwort, um in der Session gespeichert zu werden
 	 * @author clemensbeck
-	 * 
+	 * @param username
+	 * @param street
+	 * @param housenmb
+	 * @param postalcode
+	 * @param city
+	 * @param firstName
+	 * @param lastName
+	 * @param email
 	 */
 	public Benutzer(String username, String street, String housenmb, String postalcode, String city, String firstName, String lastName, String email) {
 		this.username = username;
@@ -146,19 +153,19 @@ public class Benutzer {
 	 * @param password
 	 * @return
 	 */
-	public String encryptPassword(String password) 
+	public String encryptPassword(String password)
 	{
 		try {
 			//getInstance() wird mit SHA-512 Methode aufgerufen
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
-			
+
 			//nun wird das passwort(eingegangen als String) in ein byte Array
-			//konvertiert um weitere Berechnungen damit vornehmen zu können
+			//konvertiert um weitere Berechnungen damit vornehmen zu kï¿½nnen
 			byte[] messageDigest = md.digest(password.getBytes());
-			
+
 			BigInteger no = new BigInteger(1,messageDigest);
 			String hashText = no.toString(16);
-			
+
 			while(hashText.length() < 32) {
 				hashText = "0" + hashText;
 			}
@@ -168,6 +175,6 @@ public class Benutzer {
 			throw new RuntimeException (e);
 		}
 	}
-	
+
 
 }

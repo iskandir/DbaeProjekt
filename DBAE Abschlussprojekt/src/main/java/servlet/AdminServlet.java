@@ -14,27 +14,16 @@ import database.StatementsDB;
 /**
  * Servlet implementation class AdminServlet
  */
+/**
+ * @author clemensbeck
+ *
+ */
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    /**
-     * Default constructor. 
-     */
-    public AdminServlet() {
-        // TODO Auto-generated constructor stub
-    }
-    
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	/**Je nach Button, der gedrückt wurde, wird hier die entsprechende Datenbank genutzt um die Tabelle zu befüllen
+	 * @author clemensbeck
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

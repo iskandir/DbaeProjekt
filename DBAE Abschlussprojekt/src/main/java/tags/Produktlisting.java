@@ -10,13 +10,19 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import data.Produkt;
 import database.StatementsDB;
 
-/** Dieser Tag gibt die Produkte auf index.jsp in folgender Reihenfolge aus: Beliebteste (10), Hardware, Software, Peripherie
+/** Dieses Tag gibt die Produkte auf index.jsp aus.
  *
  * @author clemensbeck
  *
  */
 public class Produktlisting extends SimpleTagSupport {
 
+	/**
+	 * Die Funktion ruft StatementsDB auf und nutzt die zurückgegebenen Arrays mit
+	 * Produkten, um der Reihe nach die beliebtesten Produkte, Hardware, Software
+	 * und Peripherie in Bootstrap Cards auszugeben.
+	 *
+	 */
 	public void doTag() throws JspException, IOException{
 		//Grundgerüst um die Daten aus der Request zu holen
 		JspWriter out = getJspContext().getOut();
@@ -89,7 +95,5 @@ public class Produktlisting extends SimpleTagSupport {
 					+ "</a>");
 		}
 		out.print("</div>");
-
-
 	}
 }

@@ -67,7 +67,6 @@ public class BestellungServlet extends HttpServlet {
 		
 		gesamtbetrag = gesamtbetrag * 1.19;
 		
-		
 		StatementsDB.bestellungHinzufuegen(new Bestellung(instant, gesamtbetrag, produktnummern, benutzer.getUsername(), benutzer.getLastName(), strasse, hausnummer, postleitzahl, stadt));
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);

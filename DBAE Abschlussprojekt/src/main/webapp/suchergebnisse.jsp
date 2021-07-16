@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Insert title here</title>
+	<title>Suchergebnisse</title>
 	
 	<meta name="author" content="Clemens Beck">
 	
@@ -15,7 +15,7 @@
 <body>
 	<jsp:include page="navigation.jsp" />
 	
-	<p class="suchergebnisse"><h1>Suchergebnisse</h1></p>
+	<h1 class="suchergebnisse">Suchergebnisse</h1>
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover">
 			<thead>

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package data;
 
@@ -16,8 +16,8 @@ public class Produkt {
 	private String type;
 	private String art;
 	private int kaufanzahl;
-	
-	/**Dieser Konstruktor erwartet kein Argument für die Membervariable art, da nicht immer bekannt ist, aus welchem table
+
+	/**Dieser Konstruktor erwartet kein Argument fï¿½r die Membervariable art, da nicht immer bekannt ist, aus welchem table
 	 * (hardware, software, peripherie) das Produkt kommt.
 	 * @param titel
 	 * @param beschreibung
@@ -34,7 +34,7 @@ public class Produkt {
 		this.produktnummer = produktnummer;
 		this.type = type;
 	}
-	
+
 	/**Dieser Konstruktor wird aufgerufen, wenn bekannt ist, ob es sich bei dem Produkt um Hardware, Software oder Peripherie
 	 * handelt.
 	 * @param titel
@@ -54,8 +54,8 @@ public class Produkt {
 		this.type = type;
 		this.art = art;
 	}
-	
-	/**Dieser Konstruktor wird aufgerufen, wenn die kaufanzahl relevant ist (z.B. für die Top 10 beliebtesten Produkte).
+
+	/**Dieser Konstruktor wird aufgerufen, wenn die kaufanzahl relevant ist (z.B. fï¿½r die Top 10 beliebtesten Produkte).
 	 * @param titel
 	 * @param beschreibung
 	 * @param preis
@@ -73,51 +73,51 @@ public class Produkt {
 		this.type = type;
 		this.kaufanzahl = kaufanzahl;
 	}
-	
+
 	public String getTitel() {
 		return titel;
 	}
-	
+
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
-	
+
 	public String getBeschreibung() {
 		return beschreibung;
 	}
-	
+
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
-	
+
 	public Double getPreis() {
 		return preis;
 	}
-	
+
 	public void setPreis(Double preis) {
 		this.preis = preis;
 	}
-	
+
 	public String getBild() {
 		return bild;
 	}
-	
+
 	public void setBild(String bild) {
 		this.bild = bild;
 	}
-	
+
 	public String getProduktnummer() {
 		return produktnummer;
 	}
-	
+
 	public void setProduktnummer(String produktnummer) {
 		this.produktnummer = produktnummer;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
