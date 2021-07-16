@@ -28,7 +28,6 @@ public class AdminServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String kategorie = request.getParameter("details");
-		System.out.println(kategorie);
 		
 		HttpSession session = request.getSession();
 		

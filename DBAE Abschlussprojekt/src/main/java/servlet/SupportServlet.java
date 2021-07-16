@@ -46,7 +46,7 @@ public class SupportServlet extends HttpServlet {
 		String msg;
 		try {
 			StatementsDB.ticketHinzufuegen(new Ticket(vorname, nachname , betreff, email, inhalt));
-			msg = "Ihr Ticket wird zeitnah von unserem Support bearbeitet.";
+			msg = "Ihr Ticket wird zeitnah mit höchster Priorität von unserem Support bearbeitet!!!";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			msg = "Ihre Anfrage konnte leider nicht gespeichert werden: " + e.getMessage();

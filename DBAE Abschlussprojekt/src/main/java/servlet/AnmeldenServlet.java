@@ -48,10 +48,7 @@ public class AnmeldenServlet extends HttpServlet {
 		String benutzername = request.getParameter("benutzername");
 		String passwort = request.getParameter("passwort");
 
-		System.out.println("DOPOST: \n benutzername " + benutzername + "\n password "
-				+ passwort);
 		tempBenutzer = new Benutzer(benutzername,passwort);
-		System.out.println();
 		String encrypt = tempBenutzer.encryptPassword(passwort);
 		tempBenutzer.setPassword(encrypt);
 				

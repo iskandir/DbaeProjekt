@@ -43,7 +43,6 @@ public class StatementsDB {
 	      rs = pstmt.executeQuery();
 	      if (rs.next()) {
 	        numberOfRows = rs.getInt(1);
-	        System.out.println("numberOfRows= " + numberOfRows);
 	      } else {
 	        System.out.println("Error: Konnte die Anzahl der User nicht auslesen");
 	      }
@@ -69,9 +68,7 @@ public class StatementsDB {
 	public static boolean benutzerHinzufuegen(Benutzer benutzer) {
 		boolean erfolg = false;
 		benutzerid = countUser() + 1;
-		System.out.println("BenutzerId ist " + benutzerid);
 		
-		System.out.println("Benutzerhinzufuegen startet");
 		/**
 		 * Füge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
 		 * setString eingefügt werden
@@ -98,7 +95,6 @@ public class StatementsDB {
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufügen der Werte!");
 				
 			}
 		} catch(SQLException e) {
@@ -138,9 +134,6 @@ public class StatementsDB {
 
 			if(rs.next()) {
 				sqlBenutzer = new Benutzer(rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
-				System.out.println("User ist mit den Logindaten"
-						+ " in der Datenbank vorhanden");
-				System.out.println(sqlBenutzer.getFirstName() + sqlBenutzer.getLastName() + sqlBenutzer.getUsername());
 				return sqlBenutzer;
 			}
 		} catch (SQLException e) {
@@ -323,8 +316,6 @@ public class StatementsDB {
 	
 	public static Produkt[] sucheProdukte(String suche) {
 		
-		System.out.println(suche);
-		
 		List<Produkt> produktListe = new ArrayList<Produkt>();
 		
 		try {
@@ -402,8 +393,7 @@ public static Ticket[] getTickets() {
 						+ "geschlossen werden;");
 			}
  		}
-    
-		System.out.println(ticketListe.size());
+
 		return ticketListe.toArray( new Ticket[ticketListe.size()]);
 	}
 	
@@ -489,7 +479,6 @@ public static Ticket[] getTickets() {
 			}
  		}
     
-		System.out.println(bestellungenList.size());
 		return bestellungenList.toArray( new Bestellung[bestellungenList.size()]);
 	}
 }
