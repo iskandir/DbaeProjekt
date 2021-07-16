@@ -329,12 +329,16 @@ public class StatementsDB {
 		
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement what = con.prepareStatement(
-					"SELECT * FROM hardware WHERE titel ILIKE '%" + suche + "%' UNION "
-					+ "SELECT * FROM software WHERE titel ILIKE '%" + suche + "%' UNION "
-					+ "SELECT * FROM peripherie WHERE titel ILIKE '%" + suche + "%'"
+			PreparedStatement st = con.prepareStatement(
+					"SELECT * FROM hardware WHERE titel ILIKE ? UNION "
+					+ "SELECT * FROM software WHERE titel ILIKE ? UNION "
+					+ "SELECT * FROM peripherie WHERE titel ILIKE ?"
 					+ ";");
-			ResultSet rs = what.executeQuery();
+			st.setString(1, "%" + suche + "%");
+			st.setString(2, "%" + suche + "%");
+			st.setString(3, "%" + suche + "%");
+			
+			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
 				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6));
