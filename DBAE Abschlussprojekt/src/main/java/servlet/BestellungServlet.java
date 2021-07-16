@@ -1,10 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.time.Instant;
 import java.util.List;
-import java.time.*;
-import java.lang.Math;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import data.*;
+import data.Benutzer;
+import data.Bestellung;
+import data.Produkt;
 import database.StatementsDB;
 
 /**

@@ -3,15 +3,12 @@ package tags;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import data.*;
-import database.*;
+import data.Produkt;
+import database.StatementsDB;
 
 /** Dieser Tag gibt die Produkte auf index.jsp in folgender Reihenfolge aus: Beliebteste (10), Hardware, Software, Peripherie
  *
@@ -21,10 +18,8 @@ import database.*;
 public class Produktlisting extends SimpleTagSupport {
 
 	public void doTag() throws JspException, IOException{
-		//GrundgerÃ¼st um die Daten aus der Request zu holen
+		//Grundgerüst um die Daten aus der Request zu holen
 		JspWriter out = getJspContext().getOut();
-		PageContext pageContext = (PageContext) getJspContext();
-		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		
 		try {
 

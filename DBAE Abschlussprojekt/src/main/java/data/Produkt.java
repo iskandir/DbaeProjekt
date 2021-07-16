@@ -4,7 +4,7 @@
 package data;
 
 /**
- * @author clemensbeck
+ * @author martenkracke, clemensbeck
  *
  */
 public class Produkt {
@@ -17,9 +17,15 @@ public class Produkt {
 	private String art;
 	private int kaufanzahl;
 	
-	//TODO Beliebtheit der Produkte
-	//Beliebteste Produkte ganz oben auf Index.jsp und in Tabelle in adminProdukte.jsp zeigen
-	
+	/**Dieser Konstruktor erwartet kein Argument für die Membervariable art, da nicht immer bekannt ist, aus welchem table
+	 * (hardware, software, peripherie) das Produkt kommt.
+	 * @param titel
+	 * @param beschreibung
+	 * @param preis
+	 * @param bild
+	 * @param produktnummer
+	 * @param type
+	 */
 	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type) {
 		this.titel = titel;
 		this.beschreibung = beschreibung;
@@ -29,6 +35,16 @@ public class Produkt {
 		this.type = type;
 	}
 	
+	/**Dieser Konstruktor wird aufgerufen, wenn bekannt ist, ob es sich bei dem Produkt um Hardware, Software oder Peripherie
+	 * handelt.
+	 * @param titel
+	 * @param beschreibung
+	 * @param preis
+	 * @param bild
+	 * @param produktnummer
+	 * @param type
+	 * @param art
+	 */
 	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type, String art) {
 		this.titel = titel;
 		this.beschreibung = beschreibung;
@@ -39,6 +55,15 @@ public class Produkt {
 		this.art = art;
 	}
 	
+	/**Dieser Konstruktor wird aufgerufen, wenn die kaufanzahl relevant ist (z.B. für die Top 10 beliebtesten Produkte).
+	 * @param titel
+	 * @param beschreibung
+	 * @param preis
+	 * @param bild
+	 * @param produktnummer
+	 * @param type
+	 * @param kaufanzahl
+	 */
 	public Produkt(String titel, String beschreibung, Double preis, String bild, String produktnummer, String type, int kaufanzahl) {
 		this.titel = titel;
 		this.beschreibung = beschreibung;

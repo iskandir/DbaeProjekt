@@ -6,14 +6,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
-import data.*;
-/** Ansammlung von verschiedenen Statemens fÃ¼r die Zugriffe auf die Datenbank
+import data.Benutzer;
+import data.Bestellung;
+import data.Produkt;
+import data.Ticket;
+/** Ansammlung von verschiedenen Statements für die Zugriffe auf die Datenbank
  * 
  * @author dennishasselbusch, clemensbeck, martenkracke
  *
@@ -21,11 +23,11 @@ import data.*;
 public class StatementsDB {
 
 	private static Connection con = null;
-	//hochzÃ¤hlen der Benutzerid zum zÃ¤hlen der Nutzer / Identifikation der Nutzer
+	//hochzählen der Benutzerid zum zählen der Nutzer / Identifikation der Nutzer
 	private static int benutzerid = 0;
 	
-	/**Funktion wird benÃ¶tigt um die Anzahl der Nutzer zu zÃ¤hlen und eine
-	 * zuverlÃ¤ssige Zuordnung der BenutzerId zu gewÃ¤hrleisten
+	/**Funktion wird benötigt um die Anzahl der Nutzer zu zählen und eine
+	 * zuverlässige Zuordnung der BenutzerId zu gewährleisten
 	 * erstellt von dennishasselbusch
 	 * @return
 	 */
@@ -59,7 +61,7 @@ public class StatementsDB {
 		return numberOfRows;
 	  }
 		
-	/**Funktion wird benÃ¶tigt um Benutzer zur Datenbank hinzuzufÃ¼gen 
+	/**Funktion wird benötigt um Benutzer zur Datenbank hinzuzufügen 
 	 * erstellt von dennishasselbusch
 	 * @param benutzer
 	 * @return
@@ -71,14 +73,14 @@ public class StatementsDB {
 		
 		System.out.println("Benutzerhinzufuegen startet");
 		/**
-		 * FÃƒÂ¼ge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
-		 * setString eingefÃƒÂ¼gt werden
+		 * Füge Values in die Datenbank. ?,?,?,?,?,?,?,?,?,? sind die Parameter die im Nachgang unter
+		 * setString eingefügt werden
 		 */
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmtUser = con.prepareStatement("INSERT INTO userdata "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-			//Befehle zum einfÃ¼gen der einzelnen Werte in die entsprechende Datenbank
+			//Befehle zum einfügen der einzelnen Werte in die entsprechende Datenbank
 			pstmtUser.setInt(1, benutzerid);
 			pstmtUser.setString(2, benutzer.getUsername());
 			pstmtUser.setString(3, benutzer.getPassword());
@@ -96,27 +98,27 @@ public class StatementsDB {
 			if(zeilen > 0) 
 			{
 				erfolg = true;
-				System.out.println("Erfolg beim hinzufÃ¼Â¼gen der Werte!");
+				System.out.println("Erfolg beim hinzufügen der Werte!");
 				
 			}
 		} catch(SQLException e) {
-			System.err.println("Fehler beim HinzufÃ¼gen der Benutzer mittels"
+			System.err.println("Fehler beim Hinzufügen der Benutzer mittels"
 					+ " der Funktion benutzerHinzufuegen(Benutzer benutzer)" + 
 					e.toString());
 		}
-		//AbschlieÃŸend muss DB wieder geschlossen werden	
+		//Abschließend muss DB wieder geschlossen werden	
 			finally {
 					try {
 						con.close();
 					} catch (SQLException e) {
-						System.err.println("Fehler beim schlieÃŸÂŸen der Datenbank" 
+						System.err.println("Fehler beim Schließen der Datenbank" 
 					+ e.toString());
 					}
 				}
 		//und return der variable erfolg als erfolgsmeldung
 		return erfolg;
 	}
-	/**Funktion die das Login des Benutzers durchfÃ¼hrt in dem Nutzername und passwort abgefragt werden
+	/**Funktion die das Login des Benutzers durchführt in dem Nutzername und passwort abgefragt werden
 	 * erstellt von dennishasselbusch
 	 * @param benutzer
 	 * @return
@@ -171,7 +173,7 @@ public class StatementsDB {
 				benutzerListe.add(newBenutzer);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler: " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -194,11 +196,12 @@ public class StatementsDB {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
+				//Da hier bekannt ist, aus welchem table das Produkt kommt, wird der Konstruktor mit dem Argument "art" aufgerufen.
 				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "hardware");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler: " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -220,11 +223,12 @@ public class StatementsDB {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
+				//Da hier bekannt ist, aus welchem table das Produkt kommt, wird der Konstruktor mit dem Argument "art" aufgerufen.
 				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "software");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler: " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -246,11 +250,12 @@ public class StatementsDB {
 			ResultSet rs = what.executeQuery();
 			
 			while(rs.next()) {
+				//Da hier bekannt ist, aus welchem table das Produkt kommt, wird der Konstruktor mit dem Argument "art" aufgerufen.
 				Produkt newProdukt = new Produkt(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(6), "peripherie");
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler: " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -263,6 +268,17 @@ public class StatementsDB {
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
 	
+	/**Diese Methode durchsucht die Datenbank nach einem Produkt, welches die übergebene Produktnummer hat. Die Methode
+	 * gibt den Wert der Variable produkt zurück. Diese wird mit null initialisiert. Wird kein Produkt mit der gegebenen
+	 * Produktnummer gefunden, so wird null zurückgegeben, was im Servlet abgefangen wird und eine entsprechende Meldung
+	 * für den Benutzer erzeugt ("Das Produkt konnte leider nicht gefunden werden."). Diese Methode wird aufgerufen,
+	 * wenn nicht bekannt ist, aus welcher der drei tables das Produkt stammt (sprich, ob es Hardware, Software oder
+	 * Peripherie ist). Aus diesem Grund werden alle tables mittels UNION SELECT vereinigt und der initiale Wert von
+	 * produkt nur dann mit einer Instanz des Produktes überschrieben, falls es gefunden werden konnte.
+	 * @param produktnummer
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Produkt getProdukt(String produktnummer) throws SQLException {
 		Produkt produkt = null;
 		Connection con = DatabaseConnection.getConnection();
@@ -279,20 +295,14 @@ public class StatementsDB {
 		return produkt;
 	}
 	
-	public static Produkt getProdukt(String produktnummer, String art) throws SQLException {
-		Produkt produkt = null;
-		Connection con = DatabaseConnection.getConnection();
-		PreparedStatement st = con.prepareStatement(
-				"SELECT * FROM " + art + " WHERE produktnummer = '" + produktnummer + "';"
-		);
-		ResultSet result = st.executeQuery();
-		con.close();
-		if (result.next()) {
-			produkt = new Produkt(result.getString(1), result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getString(6), art);
-		}
-		return produkt;
-	}
-	
+	/**Diese Methode holt die 10 Produkte aus der Datenbank, die am häufigsten gekauft wurden, um für diese auf der Startseite zu werben.
+	 * Da wir die beliebtesten Produkte aller Kategorien haben wollen, werden auch hier die 3 tables für Produkte mit UNION SELECT vereint.
+	 * Das Ergebnis wird absteigend anhand der Anzahl der Käufe sortiert und auf 10 begrenzt. Es wird der Wert der variable produkte
+	 * zurückgegeben, welche wieder mit null initialisiert und nur überschrieben wird, wenn es ein Ergebnis gibt. Da es jedoch immer ein
+	 * Ergebnis geben wird, handelt es sich dabei lediglich um einen logic-check.
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Produkt[] getTopProdukte() throws SQLException {
 		Produkt[] produkte = null;
 		Connection con = DatabaseConnection.getConnection();
@@ -331,7 +341,7 @@ public class StatementsDB {
 				produktListe.add(newProdukt);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol: " + e.toString());
+			System.err.println("SQL Fehler - " + e.toString());
 		} finally {
 			try {
 				con.close();
@@ -344,6 +354,11 @@ public class StatementsDB {
 		return produktListe.toArray( new Produkt[produktListe.size()]);
 	}
 
+	/**Diese Methode fügt ein Ticket in die Datenbank ein. Die Spalte für die ID muss nicht befüllt werden, da es sich um
+	 * eine automatisch fortlaufende Nummer handelt.
+	 * @param ticket
+	 * @throws SQLException
+	 */
 	public static void ticketHinzufuegen(Ticket ticket) throws SQLException {
 		Connection con = DatabaseConnection.getConnection();
 		con.setAutoCommit(false);
@@ -374,7 +389,7 @@ public static Ticket[] getTickets() {
 				ticketListe.add(ticket);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler - " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -411,6 +426,15 @@ public static Ticket[] getTickets() {
 			
 			stBestellung.executeUpdate();
 			
+			/*
+			 * Da diese Methode aufgerufen wird, wenn der Benutzer seinen Kauf abschließt, müssen auch an dieser Stelle die
+			 * Anzahlen an Käufe für alle Produkte, die der Benutzer kauft, entsprechend erhöht werden. Der Algorithmus läuft
+			 * durch das Array an Produktnummern und erhöht für jedes Produkt die Kaufanzahl um 1. Produktnummern von Produkten,
+			 * die mehr als ein Mal gekauft werden, sind auch mehrfach in diesem Array. Da nicht bekannt ist, in welchem Table
+			 * die Produkte liegen, muss das UPDATE statement für jede Produktnummer auf jede der drei tables ausgeführt werden.
+			 * Dies ist performance-technisch sehr schlecht, aber da in der Spezifikation die Aufteilung der Produkte in 3 tables
+			 * vorgegeben ist, ist eine andere Umsetzung nicht möglich. 
+			 */
 			for (String nummer : bestellung.getProduktnummern()) {
 				for (String table : new String[]{"hardware", "software", "peripherie"}) {
 					con.prepareStatement("UPDATE " + table + " SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = '" + nummer + "';").executeUpdate();
@@ -451,7 +475,7 @@ public static Ticket[] getTickets() {
 				bestellungenList.add(newBestellung);
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL Fehler - WTF lol");
+			System.err.println("SQL Fehler: " + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -460,8 +484,6 @@ public static Ticket[] getTickets() {
 						+ "geschlossen werden;");
 			}
  		}
-    
-		//PreparedStatement stIncrement = con.prepareStatement("UPDATE () SET kaufanzahl = kaufanzahl + 1 WHERE produktnummer = pm_div");
     
 		System.out.println(bestellungenList.size());
 		return bestellungenList.toArray( new Bestellung[bestellungenList.size()]);

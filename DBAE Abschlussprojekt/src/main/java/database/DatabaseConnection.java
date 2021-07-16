@@ -3,13 +3,13 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-/** Allgemeine Daten fÃ¼r die Datenbank Zugriffe
+/** Allgemeine Daten für die Datenbank Zugriffe
  * 
  * @author dennishasselbusch
  *
  */
 public class DatabaseConnection {
-	/**Allgemeine Zugriffsdaten um auf die Datenbank zugreifen zu kÃ¶nnen
+	/**Allgemeine Zugriffsdaten um auf die Datenbank zugreifen zu können
 	 * 
 	 */
 	protected static Connection con;

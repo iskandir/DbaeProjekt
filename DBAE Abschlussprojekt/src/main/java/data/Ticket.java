@@ -1,5 +1,10 @@
 package data;
 
+/**
+ * 
+ * @author martenkracke
+ *
+ */
 public class Ticket {
 	
 	private int id; 
@@ -9,8 +14,43 @@ public class Ticket {
 	private String mail;
 	private String inhalt;
 	
+
+	/**Dieser Konstruktor für Ticket wird beim Erstellen des Tickets aufgerufen und erwartet daher keinen
+	 * Parameter für die ID, da diese eine fortlaufende SERIAL Nummer in der Datenbank ist und daher nicht
+	 * übergeben werden muss.
+	 * @param vorname
+	 * @param name
+	 * @param betreff
+	 * @param mail
+	 * @param inhalt
+	 */
+	public Ticket(String vorname, String name, String betreff, String mail, String inhalt) {
+		this.vorname = vorname;
+		this.name = name;
+		this.betreff = betreff;
+		this.mail = mail;
+		this.inhalt = inhalt;
+	}
+	
+	/**Dieser Konstruktor wird aufgerufen, wenn Tickets aus der Datenbank geladen werden. Aus diesem Grund
+	 * erwartet diese Methode einen Parameter für die ID.
+	 * @param id
+	 * @param vorname
+	 * @param name
+	 * @param betreff
+	 * @param mail
+	 * @param inhalt
+	 */
+	public Ticket(int id, String vorname, String name, String betreff, String mail, String inhalt) {
+		this.id = id;
+		this.vorname = vorname;
+		this.name = name;
+		this.betreff = betreff;
+		this.mail = mail;
+		this.inhalt = inhalt;
+	}
+	
 	public int getId() {
-		//id getter, setter -> ID oder Timestamp ... Call me, Cookie
 		return id;
 	}	
 	public String getVorname() {
@@ -41,21 +81,6 @@ public class Ticket {
 		return inhalt;
 	}
 	public void setInhalt(String inhalt) {
-		this.inhalt = inhalt;
-	}
-	public Ticket(String vorname, String name, String betreff, String mail, String inhalt) {
-		this.vorname = vorname;
-		this.name = name;
-		this.betreff = betreff;
-		this.mail = mail;
-		this.inhalt = inhalt;
-	}
-	public Ticket(int id, String vorname, String name, String betreff, String mail, String inhalt) {
-		this.id = id;
-		this.vorname = vorname;
-		this.name = name;
-		this.betreff = betreff;
-		this.mail = mail;
 		this.inhalt = inhalt;
 	}
 }

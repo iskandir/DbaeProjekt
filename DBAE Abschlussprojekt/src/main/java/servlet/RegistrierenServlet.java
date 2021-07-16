@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import data.Benutzer;
 import database.StatementsDB;
 
-/**Servlet wird genutzt um dem Nutzer die MÃ¶glichkeit zu geben sich zu registrieren
+/**Servlet wird genutzt um dem Nutzer die Möglichkeit zu geben sich zu registrieren
  * 
  * @author dennishasselbusch
  *
@@ -21,7 +21,7 @@ public class RegistrierenServlet extends HttpServlet {
 	Benutzer benutzer = null;
 	private static final long serialVersionUID = 1L;
 
-	/**Fragt die benÃ¶tigten Parameter aus dem registrierung.jsp ab und speichert diese in der Datenbank
+	/**Fragt die benötigten Parameter aus dem registrierung.jsp ab und speichert diese in der Datenbank
 	 * Besonderheit: Das Passwort wird gehasht gespeichert
 	 * 
 	 */
@@ -58,24 +58,24 @@ public class RegistrierenServlet extends HttpServlet {
 				+ "\nCity:" + benutzer.getCity());
 		
 		
-		//PrÃ¼fe ob PasswÃ¶rter-Spalte leer sind
+		//Prüfe ob Passwörter-Spalte leer sind
 		if(benutzer.getPassword().isEmpty())
 		{
 			System.out.println("Passwort ist leer!");			
 		} 
 		else
-		/** PrÃ¼fe lÃ¤nge der Email >= 8
+		/** Prüfe lÃ¤nge der Email >= 8
 		 * 
 		 */
 			if(benutzer.getEmail().length() >= 8)
 			{	
-				/** PrÃ¼fe ob PasswÃ¶rter gleich sind
+				/** Prüfe ob Passwörter gleich sind
 				 * 
 				 */
 				if(password.equals(passwordWdh))
 				{
 					System.out.println("PW wdhl gleich pwdw.");
-					//PrÃ¼fe ob StatementsDB.benutzerHinzufuegen true, dann setze Attribute und gehe auf die index.jsp
+					//Prüfe ob StatementsDB.benutzerHinzufuegen true, dann setze Attribute und gehe auf die index.jsp
 					if(StatementsDB.benutzerHinzufuegen(benutzer))
 					{
 						System.out.println("starte");

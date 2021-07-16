@@ -38,7 +38,7 @@ public class AnmeldenServlet extends HttpServlet {
 		
 		
 	}
-	/** Wird benÃ¶tigt um den
+	/** Wird benötigt um den
 	 * Benutzer einzuloggen, dass Passwort zu hashen und mit der Datenbank
 	 * abzugleichen. 
 	 * @author dennishasselbusch
@@ -57,7 +57,7 @@ public class AnmeldenServlet extends HttpServlet {
 				
 		Benutzer sqlBenutzer = StatementsDB.benutzerLogin(tempBenutzer);
 		
-		//case 1 - Logge Nutzer ein, erstelle eine Session und gehe zurÃ¼ck zur Startseite
+		//case 1 - Logge Nutzer ein, erstelle eine Session und gehe zurück zur Startseite
 		//case 2 - gib Fehlermeldung aus und bleibe bei Login
 		
 		if(sqlBenutzer != null) {

@@ -46,13 +46,12 @@ public class Benutzer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	/** Konstruktor fÃ¼r Login eines Benutzers
+	/** Konstruktor für Login eines Benutzers
 	 * @author dennishasselbusch
 	 * @param email
 	 * @param password
 	 */
 	public Benutzer(String username, String password) {
-		super();
 		this.username = username;
 		this.password = password;
 	}
@@ -154,7 +153,7 @@ public class Benutzer {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			
 			//nun wird das passwort(eingegangen als String) in ein byte Array
-			//konvertiert um weitere Berechnungen damit vornehmen zu kÃ¶nnen
+			//konvertiert um weitere Berechnungen damit vornehmen zu können
 			byte[] messageDigest = md.digest(password.getBytes());
 			
 			BigInteger no = new BigInteger(1,messageDigest);

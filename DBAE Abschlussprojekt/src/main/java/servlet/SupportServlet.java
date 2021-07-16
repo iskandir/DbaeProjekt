@@ -14,7 +14,9 @@ import database.StatementsDB;
 import data.Ticket;
 
 /**
- * Servlet implementation class support
+ * 
+ * @author martenkracke
+ *
  */
 @WebServlet("/SupportServlet")
 public class SupportServlet extends HttpServlet {
@@ -28,7 +30,10 @@ public class SupportServlet extends HttpServlet {
 
 	}
 
-
+	/**
+	 * Die Daten zum Ticket werden aus den Parametern gelesen und verwendet, um eine Instanz von Ticket zu erstellen,
+	 * welche dann in der Datenbank gespeichert wird.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
